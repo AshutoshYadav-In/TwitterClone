@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    list-style-type: none;
+    scroll-behavior: smooth;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    --main: rgb(0, 0, 0);
+    --sec: rgb(231,233,234);
+    --secdim : rgb(113,118,123);
+    --border: rgb(47,51,54);
+    --hover:rgb(24,24,24);
+    --blue: rgb(29,155,240);
+    --hoverblue: rgba(29,155,240,0.8);
+}
+body{
+    background-color: var(--main);
+}
+.App{
+padding: 0rem 20rem;
+}
+/* media queries */
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .App{
+    padding: 0rem 16rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .App{
+    padding: 0rem 13rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .App{
+    padding: 0rem 8rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .App{
+    padding: 0rem 5rem;
+    }
+}
+
+@media (min-width: 420px) and (max-width: 576px) {
+  .App{
+    padding: 0rem 3rem;
+    }
+}
+
+@media (min-width: 310px) and (max-width: 420px) {
+  .App{
+    padding: 0rem 1rem;
+    }
+}

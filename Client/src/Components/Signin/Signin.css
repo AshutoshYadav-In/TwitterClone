@@ -1,0 +1,227 @@
+.Signin-Component{
+    min-height: 100vh;
+    display: flex;
+    padding: 2rem 0rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.Signin-Component p{
+color: var(--sec);
+}
+.Signin-Component-Left{
+ width: 50%;   
+}
+.Signin-Component-Left svg{
+    width: 75%;
+}
+.Signin-Component-Right{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+.Signin-Component-Right form{
+    padding: 1.5rem 1rem;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 1.5rem;
+    border: 1px solid var(--border);
+}
+.Signin-Component-Right form>p{
+    text-align: center;
+    font-size: 2rem;
+}
+.Signin-Component-Right form .Form-Options{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.Signin-Component-Right form .Form-Options input{
+    width: 100%;
+    height: 32px;
+    padding: 0rem 0.5rem;
+}
+.Signin-Component-Right form button{
+    padding: 0.3rem 0rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: var(--blue);
+    border: none;
+    transition: 0.2s;
+    color: white;
+    border-radius: 15px;
+}
+.Signin-Component-Right form button:hover{
+    background-color: var(--hoverblue);
+}
+.Signin-Component-Right-Bottom{
+display: flex;
+flex-direction: row;
+gap:0.5rem;
+}
+.Signin-Component-Right-Bottom a{
+    color: var(--blue);
+    transition: 0.2s;
+}
+.Signin-Component-Right-Bottom a:hover{
+color: var(--hoverblue);
+}
+/* ..media queries.. */
+@media (min-width: 1200px) and (max-width: 1400px) {
+    .Signin-Component-Left{
+        width: 45%;   
+       }
+       .Signin-Component-Left svg{
+        width: 90%;
+    }
+       .Signin-Component-Right{
+        width: 55%;   
+       }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .Signin-Component-Left{
+        width: 45%;   
+       }
+       .Signin-Component-Left svg{
+        width: 90%;
+    }
+       .Signin-Component-Right{
+        width: 55%;   
+       }
+       .Signin-Component-Right form p{
+        font-size: 0.95rem;
+    }
+    .Signin-Component-Right form a{
+        font-size: 0.95rem;
+    }
+    .Signin-Component-Right form button{
+        font-size: 0.95rem;
+    }
+       .Signin-Component-Right form>p{
+        font-size: 1.8rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+.Signin-Component{
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+.Signin-Component-Left{
+    width: 100%;   
+    text-align: center;
+   }
+   .Signin-Component-Left svg{
+    width: 10%;
+}
+   .Signin-Component-Right{
+    width: 80%;   
+   }
+   .Signin-Component-Right form p{
+    font-size: 0.95rem;
+}
+.Signin-Component-Right form a{
+    font-size: 0.95rem;
+}
+.Signin-Component-Right form button{
+    font-size: 0.95rem;
+}
+   .Signin-Component-Right form>p{
+    font-size: 1.8rem;
+}
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .Signin-Component{
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .Signin-Component-Left{
+        width: 100%;   
+        text-align: center;
+       }
+       .Signin-Component-Left svg{
+        width: 15%;
+    }
+       .Signin-Component-Right{
+        width: 90%;   
+       }
+       .Signin-Component-Right form p{
+        font-size: 0.95rem;
+    }
+    .Signin-Component-Right form a{
+        font-size: 0.95rem;
+    }
+    .Signin-Component-Right form button{
+        font-size: 0.95rem;
+    }
+       .Signin-Component-Right form>p{
+        font-size: 1.8rem;
+    }
+    
+}
+
+@media (min-width: 420px) and (max-width: 576px) {
+    .Signin-Component{
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .Signin-Component-Left{
+        width: 100%;   
+        text-align: center;
+       }
+       .Signin-Component-Left svg{
+        width: 15%;
+    }
+       .Signin-Component-Right{
+        width: 100%;   
+       }
+       .Signin-Component-Right form p{
+        font-size: 0.9rem;
+    }
+    .Signin-Component-Right form a{
+        font-size: 0.9rem;
+    }
+    .Signin-Component-Right form button{
+        font-size: 0.9rem;
+    }
+       .Signin-Component-Right form>p{
+        font-size: 1.7rem;
+    }
+}
+
+@media (min-width: 310px) and (max-width: 420px) {
+    .Signin-Component{
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .Signin-Component-Left{
+        width: 100%;   
+        text-align: center;
+       }
+       .Signin-Component-Left svg{
+        width: 15%;
+    }
+       .Signin-Component-Right{
+        width: 100%;   
+       }
+       .Signin-Component-Right form p{
+        font-size: 0.85rem;
+    }
+    .Signin-Component-Right form a{
+        font-size: 0.85rem;
+    }
+    .Signin-Component-Right form button{
+        font-size: 0.85rem;
+    }
+       .Signin-Component-Right form>p{
+        font-size: 1.6rem;
+    }
+}
