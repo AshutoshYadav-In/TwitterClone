@@ -1,0 +1,123 @@
+.Header-Component{
+    height: 55px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 1.5rem 1rem;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: var(--main);
+}
+.Header-Component :nth-child(1){
+    font-size: 1.5rem;
+}
+.Header-Component :nth-child(2){
+    border-radius: 20px;
+    border: none;
+    background-color: var(--border);
+    color: var(--sec);
+    padding: 0rem 1rem;
+    height: 35px;
+    width: 70%;
+}
+.Header-Component :nth-child(3){
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.Header-Component :nth-child(3):hover{
+cursor: pointer;
+}
+.Header-Component :nth-child(3) img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@media (min-width: 1200px) and (max-width: 1400px) {
+
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .Header-Component{
+        padding: 1.5rem 0rem;
+      position: relative;
+      border-bottom: none;
+    }
+    .Header-Component:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 1px;
+            background-color: var(--border);
+      }
+}
+
+@media (min-width: 420px) and (max-width: 576px) {
+    .Header-Component :nth-child(2){
+     width: 65%;
+     max-height: 32px;
+     font-size: 0.8rem;
+    }
+    .Header-Component{
+        padding: 1.5rem 0rem;
+      position: relative;
+      border-bottom: none;
+    }
+    .Header-Component:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 1px;
+            background-color: var(--border);
+      }
+      .Header-Component :nth-child(3){
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (min-width: 310px) and (max-width: 420px) {
+    .Header-Component :nth-child(2){
+        width: 65%;
+        max-height: 30px;
+        font-size: 0.8rem;
+       }
+       .Header-Component{
+        padding: 1.5rem 0rem;
+      position: relative;
+      border-bottom: none;
+    }
+    .Header-Component:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 1px;
+            background-color: var(--border);
+      }
+      .Header-Component :nth-child(3){
+        width: 35px;
+        height: 35px;
+    }
+}

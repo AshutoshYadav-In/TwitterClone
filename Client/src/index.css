@@ -18,12 +18,14 @@
     --hover:rgb(24,24,24);
     --blue: rgb(29,155,240);
     --hoverblue: rgba(29,155,240,0.8);
+    --red: #ff4141;
 }
 body{
     background-color: var(--main);
 }
 .App{
 padding: 0rem 20rem;
+position: relative;
 }
 /* media queries */
 @media (min-width: 1200px) and (max-width: 1400px) {
@@ -34,25 +36,25 @@ padding: 0rem 20rem;
 
 @media (min-width: 992px) and (max-width: 1200px) {
   .App{
-    padding: 0rem 13rem;
+    padding: 0rem 11rem;
     }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
   .App{
-    padding: 0rem 8rem;
+    padding: 0rem 4rem;
     }
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
   .App{
-    padding: 0rem 5rem;
+    padding: 0rem 2rem;
     }
 }
 
 @media (min-width: 420px) and (max-width: 576px) {
   .App{
-    padding: 0rem 3rem;
+    padding: 0rem 1rem;
     }
 }
 

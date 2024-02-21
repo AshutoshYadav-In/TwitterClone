@@ -1,12 +1,23 @@
-import React from 'react';
+import {React, useContext} from 'react';
 import './Sidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons'; 
+import { faX } from '@fortawesome/free-solid-svg-icons';
 import { faFeatherPointed,faArrowRightFromBracket, faCode } from '@fortawesome/free-solid-svg-icons'; 
+import { appContext } from '../../App';
 function Sidebar() {
+  const {AppHelpers, SetAppHelpers} = useContext(appContext);
+  //handle sidebar toggle 
+  const handleSidebarToggle = ()=>{
+    SetAppHelpers(prevState => ({
+      ...prevState,
+      toggleforsidebar: !prevState.toggleforsidebar
+    }));
+  } 
   return (
-    <div className='Sidebar-Component'>
+    <div className={AppHelpers.toggleforsidebar? 'Sidebar-Component Sidebar-Component-Transition' : "Sidebar-Component"}>
         <div className='Sidebar-Component-Upper'>
+        <FontAwesomeIcon icon={faX} style={{color: "#e7e9ea",}} onClick={handleSidebarToggle}/>
             <div className='Sidebar-Component-Profiledetails'>
              <div className='Sidebar-Component-Profiledetails-Upper'>
               <div className='Sidebar-Component-Profiledetails-Upper-Imagecon'>

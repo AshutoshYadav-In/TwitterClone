@@ -119,7 +119,7 @@ color: var(--hoverblue);
     width: 10%;
 }
    .Sign-Component-Right{
-    width: 80%;   
+    width: 70%;   
    }
    .Sign-Component-Right form p{
     font-size: 0.95rem;
@@ -149,7 +149,7 @@ color: var(--hoverblue);
         width: 15%;
     }
        .Sign-Component-Right{
-        width: 90%;   
+        width: 80%;   
        }
        .Sign-Component-Right form p{
         font-size: 0.95rem;
@@ -171,6 +171,7 @@ color: var(--hoverblue);
         flex-direction: column;
         justify-content: center;
         gap: 1rem;
+        min-height: 100svh;
     }
     .Sign-Component-Left{
         width: 100%;   
@@ -201,6 +202,7 @@ color: var(--hoverblue);
         flex-direction: column;
         justify-content: center;
         gap: 1rem;
+        min-height: 100svh;
     }
     .Sign-Component-Left{
         width: 100%;   
@@ -213,13 +215,13 @@ color: var(--hoverblue);
         width: 100%;   
        }
        .Sign-Component-Right form p{
-        font-size: 0.85rem;
+        font-size: 0.82rem;
     }
     .Sign-Component-Right form a{
-        font-size: 0.85rem;
+        font-size: 0.82rem;
     }
     .Sign-Component-Right form button{
-        font-size: 0.85rem;
+        font-size: 0.82rem;
     }
        .Sign-Component-Right form>p{
         font-size: 1.6rem;

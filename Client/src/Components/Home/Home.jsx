@@ -1,7 +1,9 @@
+import Sidebar from '../Sidebar/Sidebar'
+import Header from '../Header/Header';
 import React from 'react'
+import Tweet from '../Tweet/Tweet.jsx';
 import './Home.css'
 import { useRef, useState } from 'react';
-import Sidebar from '../Sidebar/Sidebar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
@@ -39,6 +41,7 @@ function Home() {
         <div className='Home-Component'>
             <Sidebar />
             <div className='Home-Component-Content'>
+                <Header/>
                 <form className='Home-Component-WriteTweet'>
                     <div className='Home-Component-WriteTweet-Left'>
                         <div>
@@ -60,6 +63,7 @@ function Home() {
                     </div>
                     <input type="file" accept="image/*" ref={inputRef} style={{ display: 'none' }} onChange={handleFileChange} />
                 </form>
+                <Tweet></Tweet>
             </div>
         </div>
     )
