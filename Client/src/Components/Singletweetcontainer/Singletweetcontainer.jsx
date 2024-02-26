@@ -1,14 +1,13 @@
-import Sidebar from '../Sidebar/Sidebar'
-import Header from '../Header/Header';
 import React from 'react'
-import Tweet from '../Tweet/Tweet.jsx';
-import './Home.css'
-import { useRef, useState } from 'react';
+import './Singletweetcontainer.css'
+import Topnav from '../Topnav/Topnav'
+import Tweet from '../Tweet/Tweet'
+import { useState,useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import TextareaAutosize from 'react-textarea-autosize';
-function Home() {
+function Singletweetcontainer() {
     const inputRef = useRef(null);
     const [ImageState, SetImageState] = useState({
         preview: '',
@@ -37,12 +36,11 @@ function Home() {
             file: null
         })
     }
-    return (
-        <div className='Home-Component'>
-            <Sidebar />
-            <div className='Home-Component-Content'>
-                <Header/>
-                <form className='Home-Component-WriteTweet'>
+  return (
+    <div className='Singletweetcontainer-Component'>
+      <Topnav  toggle = {"name"}/>
+      <Tweet/>
+      <form className='Home-Component-WriteTweet'>
                     <div className='Home-Component-WriteTweet-Left'>
                         <div>
                             <img src="https://res.cloudinary.com/deeji7ttf/image/upload/v1706339303/Nextcartassets/l2ar6zznkqmqxorjben5.jpg" alt="" />
@@ -58,15 +56,19 @@ function Home() {
                             <label onClick={handleImageClick}>
                                 <FontAwesomeIcon icon={faImage} />
                             </label>
-                            <button>Post</button>
+                            <button>Reply</button>
                         </div>
                     </div>
                     <input type="file" accept="image/*" ref={inputRef} style={{ display: 'none' }} onChange={handleFileChange} />
                 </form>
                 <Tweet/>
-            </div>
-        </div>
-    )
+                <Tweet/>
+                <Tweet/>
+                <Tweet/>
+                <Tweet/>
+                <Tweet/>
+    </div>
+  )
 }
 
-export default Home
+export default Singletweetcontainer

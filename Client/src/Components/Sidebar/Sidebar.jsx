@@ -2,7 +2,7 @@ import {React, useContext} from 'react';
 import './Sidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons'; 
-import { faX } from '@fortawesome/free-solid-svg-icons';
+import { faX , faHouse} from '@fortawesome/free-solid-svg-icons';
 import { faFeatherPointed,faArrowRightFromBracket, faCode } from '@fortawesome/free-solid-svg-icons'; 
 import { appContext } from '../../App';
 function Sidebar() {
@@ -38,6 +38,10 @@ function Sidebar() {
                     <p>Followers</p>
                 </div>
              </div>
+            </div>
+            <div className='Sidebar-Component-Options'>
+            <FontAwesomeIcon icon={faHouse} style={{color: "#e7e9ea",}} />
+            <p>Home</p>
             </div>
             <div className='Sidebar-Component-Options'>
             <FontAwesomeIcon icon={faUser} style={{color: "#e7e9ea",}} />

@@ -1,0 +1,99 @@
+.Topnav-Component{
+    display: flex;
+    gap: 1rem;
+    height: 55px;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background-color: var(--main);
+    z-index: 2;
+}
+.Topnav-Component> svg{
+    font-size: 1.2rem;
+    transition: 0.2s;
+}
+.Topnav-Component> svg:hover{
+    color: var(--secdim) !important;
+    cursor: pointer;
+}
+.Topnav-Component p{
+    color: var(--sec);
+    font-size: 1rem;
+}
+.Topnav-Component input{
+    border-radius: 20px;
+    border: none;
+    background-color: var(--border);
+    color: var(--sec);
+    padding: 0rem 1rem;
+    height: 35px;
+    width: 100%;
+}
+/* media queries */
+@media (min-width: 1200px) and (max-width: 1400px) {
+
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .Topnav-Component> svg{
+        font-size: 1.1rem;
+        transition: 0.2s;
+    }
+    .Topnav-Component p{
+        color: var(--sec);
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .Topnav-Component> svg{
+        font-size: 1.1rem;
+        transition: 0.2s;
+    }
+    .Topnav-Component p{
+        color: var(--sec);
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .Topnav-Component> svg{
+        font-size: 1.1rem;
+        transition: 0.2s;
+    }
+    .Topnav-Component p{
+        color: var(--sec);
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 420px) and (max-width: 576px) {
+    .Topnav-Component> svg{
+        font-size: 1rem;
+        transition: 0.2s;
+    }
+    .Topnav-Component p{
+        color: var(--sec);
+        font-size: 0.9rem;
+    }
+    .Topnav-Component{
+        height: 50px;
+    }
+}
+
+@media (min-width: 310px) and (max-width: 420px) {
+    .Topnav-Component> svg{
+        font-size: 1rem;
+        transition: 0.2s;
+    }
+    .Topnav-Component p{
+        color: var(--sec);
+        font-size: 0.9rem;
+    }
+    .Topnav-Component{
+        height: 50px;
+    }
+}

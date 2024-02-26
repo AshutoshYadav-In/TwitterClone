@@ -1,7 +1,7 @@
 .Sign-Component{
     min-height: 100vh;
     display: flex;
-    padding: 2rem 0rem;
+    padding: 2rem 20rem;
     align-items: center;
     justify-content: space-between;
 }
@@ -79,6 +79,9 @@ color: var(--hoverblue);
        .Sign-Component-Right{
         width: 55%;   
        }
+       .Sign-Component{
+        padding: 2rem 16rem;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1200px) {
@@ -102,6 +105,9 @@ color: var(--hoverblue);
     }
        .Sign-Component-Right form>p{
         font-size: 1.8rem;
+    }
+    .Sign-Component{
+        padding: 2rem 9rem;
     }
 }
 
@@ -133,6 +139,9 @@ color: var(--hoverblue);
    .Sign-Component-Right form>p{
     font-size: 1.8rem;
 }
+.Sign-Component{
+    padding: 2rem 4rem;
+}
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
@@ -163,7 +172,9 @@ color: var(--hoverblue);
        .Sign-Component-Right form>p{
         font-size: 1.8rem;
     }
-    
+    .Sign-Component{
+        padding: 2rem 2rem;
+    }
 }
 
 @media (min-width: 420px) and (max-width: 576px) {
@@ -195,6 +206,9 @@ color: var(--hoverblue);
        .Sign-Component-Right form>p{
         font-size: 1.7rem;
     }
+    .Sign-Component{
+        padding: 2rem 1rem;
+    }
 }
 
 @media (min-width: 310px) and (max-width: 420px) {
@@ -225,5 +239,8 @@ color: var(--hoverblue);
     }
        .Sign-Component-Right form>p{
         font-size: 1.6rem;
+    }
+    .Sign-Component{
+        padding: 2rem 1rem;
     }
 }

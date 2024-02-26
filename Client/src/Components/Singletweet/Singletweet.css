@@ -1,0 +1,42 @@
+.Singletweet-Component{
+    color: var(--sec);
+    height: 100vh;
+    padding: 0rem 20rem;
+    display: flex;
+}
+/* media queries */
+@media (min-width: 1200px) and (max-width: 1400px) {
+    .Singletweet-Component{
+        padding: 0rem 16rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .Singletweet-Component{
+        padding: 0rem 9rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .Singletweet-Component{
+        padding: 0rem 4rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .Singletweet-Component{
+        padding: 0rem 0rem;
+    }
+}
+
+@media (min-width: 420px) and (max-width: 576px) {
+    .Singletweet-Component{
+        padding: 0rem 0rem;
+    }
+}
+
+@media (min-width: 310px) and (max-width: 420px) {
+    .Singletweet-Component{
+        padding: 0rem 0rem;
+    }
+}

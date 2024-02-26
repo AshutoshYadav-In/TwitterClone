@@ -1,0 +1,51 @@
+.Profilecontent-Component{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 100vh;
+    border-right: 1px solid var(--border);
+   overflow-y: scroll;
+   overflow-x: hidden;
+}
+.Profilecontent-Component::-webkit-scrollbar {
+    display: none;
+}
+.Profilecontent-Component {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+  }
+  @media (min-width: 1200px) and (max-width: 1400px) {
+    .Profilecontent-Component{
+        width: 67%;
+    }
+  }
+  
+  @media (min-width: 992px) and (max-width: 1200px) {
+    .Profilecontent-Component{
+        width: 67%;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 992px) {
+    .Profilecontent-Component{
+        width: 60%;
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 768px) {
+    .Profilecontent-Component{
+        width: 100%;
+    }
+  }
+  
+  @media (min-width: 420px) and (max-width: 576px) {
+    .Profilecontent-Component{
+        width: 100%;
+    }
+  }
+  
+  @media (min-width: 310px) and (max-width: 420px) {
+    .Profilecontent-Component{
+        width: 100%;
+    }
+  }

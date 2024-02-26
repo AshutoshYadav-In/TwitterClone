@@ -2,6 +2,7 @@
     display: flex;
     height: 100vh;
     color: var(--sec);
+    padding: 0rem 20rem;
 }
 
 .Home-Component-Content {
@@ -10,12 +11,12 @@
     border-right: 1px solid var(--border);
     width: 70%;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
-/* Hide scrollbar for Chrome, Safari and Opera */
 .Home-Component-Content::-webkit-scrollbar {
     display: none;
 }
-/* Hide scrollbar for IE, Edge and Firefox */
+
 .Home-Component-Content {
   -ms-overflow-style: none; 
   scrollbar-width: none;  
@@ -109,13 +110,13 @@ opacity: 0.8;
   }
   
 
-.Home-Component-WriteTweet-Right :nth-child(3) {
+.Home-Component-Buttons-Con {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.Home-Component-WriteTweet-Right :nth-child(3) :nth-child(1) {
+.Home-Component-Buttons-Con :nth-child(1) {
     font-size: 1.5rem;
     fill: var(--blue);
     cursor: pointer;
@@ -123,11 +124,11 @@ opacity: 0.8;
     filter: drop-shadow(0rem 0rem 0.5rem rgba(29, 155, 240, 0.2));
 }
 
-.Home-Component-WriteTweet-Right :nth-child(3) :nth-child(1):hover {
+.Home-Component-Buttons-Con:nth-child(1):hover {
     filter: drop-shadow(0rem 0rem 0.5rem rgba(29, 155, 240, 0.7));
 }
 
-.Home-Component-WriteTweet-Right :nth-child(3) :nth-child(2) {
+.Home-Component-Buttons-Con :nth-child(2) {
     padding: 0.2rem 1.2rem;
     background-color: var(--blue);
     border: none;
@@ -138,7 +139,7 @@ opacity: 0.8;
     transition: 0.2s;
 }
 
-.Home-Component-WriteTweet-Right :nth-child(3) :nth-child(2):hover {
+.Home-Component-Buttons-Con :nth-child(2):hover {
     background-color: var(--hoverblue);
 }
 /* media queries */
@@ -148,6 +149,9 @@ opacity: 0.8;
 }
 .Home-Component-WriteTweet-Right-Imagecon {
     width: 95%;
+}
+.Home-Component {
+    padding: 0rem 16rem;
 }
 }
 
@@ -159,17 +163,19 @@ opacity: 0.8;
         font-size: 0.97rem;
         min-height: 33px;
     }
-    .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(1) {
+    .Home-Component-Buttons-Con :nth-child(1) {
         font-size: 1.5rem;
     }
-    .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(2) {
+    .Home-Component-Buttons-Con :nth-child(3) :nth-child(2) {
         font-size: 0.9rem;
         padding: 0.2rem 1.2rem;
     }
     .Home-Component-WriteTweet-Right-Imagecon {
         width: 100%;
     }
-
+    .Home-Component {
+        padding: 0rem 9rem;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
@@ -177,18 +183,21 @@ opacity: 0.8;
       width: 60%;
     }
     .Home-Component-WriteTweet-Right textarea{
-        font-size: 0.95rem;
+        font-size: 0.92rem;
         min-height: 30px;
     }
-    .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(1) {
+    .Home-Component-Buttons-Con :nth-child(1) {
         font-size: 1.4rem;
     }
-    .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(2) {
+    .Home-Component-Buttons-Con :nth-child(2) {
         font-size: 0.85rem;
         padding: 0.2rem 1.1rem;
     }
     .Home-Component-WriteTweet-Right-Imagecon {
         width: 100%;
+    }
+    .Home-Component {
+        padding: 0rem 4rem;
     }
 
 }
@@ -202,10 +211,10 @@ opacity: 0.8;
         font-size: 0.9rem;
         min-height: 32px;
     }
-    .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(1) {
+    .Home-Component-Buttons-Con :nth-child(1) {
         font-size: 1.6rem;
     }
-    .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(2) {
+    .Home-Component-Buttons-Con :nth-child(2) {
         font-size: 0.85rem;
         padding: 0.3rem 1.2rem;
     }
@@ -213,20 +222,12 @@ opacity: 0.8;
         width: 80%;
     }
     .Home-Component-WriteTweet {
-        padding: 1rem 0rem;
+        padding: 1rem 2rem;
         position: relative;
-        border-bottom: none;
     }
-    .Home-Component-WriteTweet:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100vw;
-        height: 1px;
-        background-color: var(--border);
-  }
+  .Home-Component {
+    padding: 0rem 0rem;
+}
 }
 
 @media (min-width: 420px) and (max-width: 576px) {
@@ -238,10 +239,10 @@ opacity: 0.8;
         font-size: 0.87rem;
         min-height: 30px;
     }
-    .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(1) {
+    .Home-Component-Buttons-Con :nth-child(1) {
         font-size: 1.4rem;
     }
-    .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(2) {
+    .Home-Component-Buttons-Con :nth-child(2) {
         font-size: 0.75rem;
         padding: 0.2rem 1.1rem;
     }
@@ -250,25 +251,16 @@ opacity: 0.8;
         max-height: 60vh;
     }
     .Home-Component-WriteTweet {
-        padding: 1rem 0rem;
+        padding: 1rem 1rem;
         position: relative;
-        border-bottom: none;
     }
-    .Home-Component-WriteTweet:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100vw;
-        height: 1px;
-        background-color: var(--border);
-  }
   .Home-Component-WriteTweet-Left :nth-child(1) {
     width: 35px;
     height: 35px;
 }
-
+.Home-Component {
+    padding: 0rem 0rem;
+}
 }
 
 @media (min-width: 310px) and (max-width: 420px) {
@@ -280,10 +272,10 @@ opacity: 0.8;
        font-size: 0.8rem;
        min-height: 25px;
    }
-   .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(1) {
+   .Home-Component-Buttons-Con :nth-child(1) {
        font-size: 1.3rem;
    }
-   .Home-Component-WriteTweet-Right :nth-child(3) :nth-child(2) {
+   .Home-Component-Buttons-Con :nth-child(2) {
        font-size: 0.7rem;
        padding: 0.2rem 1.1rem;
    }
@@ -292,22 +284,14 @@ opacity: 0.8;
        max-height: 60vh;
    }
    .Home-Component-WriteTweet {
-    padding: 1rem 0rem;
+    padding: 1rem 1rem;
     position: relative;
-    border-bottom: none;
-}
-.Home-Component-WriteTweet:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 1px;
-    background-color: var(--border);
 }
 .Home-Component-WriteTweet-Left :nth-child(1) {
     width: 35px;
     height: 35px;
+}
+.Home-Component {
+    padding: 0rem 0rem;
 }
 }

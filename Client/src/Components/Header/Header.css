@@ -1,4 +1,9 @@
 .Header-Component{
+    position:sticky;
+    top: 0;
+    z-index: 2;
+}
+.Header-Component-Container{
     height: 55px;
     display: flex;
     align-items: center;
@@ -7,15 +12,12 @@
     padding: 1.5rem 1rem;
     gap: 0.5rem;
     border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 2;
     background-color: var(--main);
 }
-.Header-Component :nth-child(1){
+.Header-Component-Container :nth-child(1){
     font-size: 1.5rem;
 }
-.Header-Component :nth-child(2){
+.Header-Component-Container :nth-child(2){
     border-radius: 20px;
     border: none;
     background-color: var(--border);
@@ -24,16 +26,16 @@
     height: 35px;
     width: 70%;
 }
-.Header-Component :nth-child(3){
+.Header-Component-Container :nth-child(3){
     width: 40px;
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
 }
-.Header-Component :nth-child(3):hover{
+.Header-Component-Container :nth-child(3):hover{
 cursor: pointer;
 }
-.Header-Component :nth-child(3) img{
+.Header-Component-Container :nth-child(3) img{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -51,35 +53,24 @@ cursor: pointer;
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
-    .Header-Component{
-        padding: 1.5rem 0rem;
+    .Header-Component-Container{
+        padding: 1.5rem 2rem;
       position: relative;
-      border-bottom: none;
     }
-    .Header-Component:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100vw;
-            height: 1px;
-            background-color: var(--border);
-      }
 }
 
 @media (min-width: 420px) and (max-width: 576px) {
-    .Header-Component :nth-child(2){
+    .Header-Component-Container :nth-child(2){
      width: 65%;
      max-height: 32px;
      font-size: 0.8rem;
     }
-    .Header-Component{
-        padding: 1.5rem 0rem;
+    .Header-Component-Container{
+        padding: 1.5rem 1rem;
       position: relative;
       border-bottom: none;
     }
-    .Header-Component:after {
+    .Header-Component-Container:after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -101,12 +92,12 @@ cursor: pointer;
         max-height: 30px;
         font-size: 0.8rem;
        }
-       .Header-Component{
-        padding: 1.5rem 0rem;
+       .Header-Component-Container{
+        padding: 1.5rem 1rem;
       position: relative;
       border-bottom: none;
     }
-    .Header-Component:after {
+    .Header-Component-Container:after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -116,7 +107,7 @@ cursor: pointer;
             height: 1px;
             background-color: var(--border);
       }
-      .Header-Component :nth-child(3){
+      .Header-Component-Container :nth-child(3){
         width: 35px;
         height: 35px;
     }

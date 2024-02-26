@@ -15,10 +15,13 @@ function Header() {
   } 
   return (
     <div className='Header-Component'>
+      <div className='Header-Component-Container'>
+
       <FontAwesomeIcon icon={faXTwitter} style={{ color: "#e7e9ea", }} />
       <input type="text" placeholder='Search X' />
       <div onClick={handleSidebarToggle}>
         <img src="https://res.cloudinary.com/deeji7ttf/image/upload/v1706339303/Nextcartassets/l2ar6zznkqmqxorjben5.jpg" alt="" />
+      </div>
       </div>
     </div>
   )

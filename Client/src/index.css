@@ -12,6 +12,7 @@
     font-family: 'Open Sans', sans-serif;
     font-family: 'Poppins', sans-serif;
     --main: rgb(0, 0, 0);
+    --maindim: rgba(0,0,0,0.6);
     --sec: rgb(231,233,234);
     --secdim : rgb(113,118,123);
     --border: rgb(47,51,54);
@@ -24,42 +25,5 @@ body{
     background-color: var(--main);
 }
 .App{
-padding: 0rem 20rem;
 position: relative;
-}
-/* media queries */
-@media (min-width: 1200px) and (max-width: 1400px) {
-  .App{
-    padding: 0rem 16rem;
-    }
-}
-
-@media (min-width: 992px) and (max-width: 1200px) {
-  .App{
-    padding: 0rem 11rem;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 992px) {
-  .App{
-    padding: 0rem 4rem;
-    }
-}
-
-@media (min-width: 576px) and (max-width: 768px) {
-  .App{
-    padding: 0rem 2rem;
-    }
-}
-
-@media (min-width: 420px) and (max-width: 576px) {
-  .App{
-    padding: 0rem 1rem;
-    }
-}
-
-@media (min-width: 310px) and (max-width: 420px) {
-  .App{
-    padding: 0rem 1rem;
-    }
 }

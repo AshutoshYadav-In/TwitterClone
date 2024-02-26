@@ -9,10 +9,7 @@
     flex-direction: column;
     padding: 1rem 0.5rem;
     justify-content: space-between;
-    /* position: sticky;
-    top: 0; */
 }
-
 .Sidebar-Component-Upper {
     display: flex;
     flex-direction: column;
@@ -57,7 +54,9 @@
     display: flex;
     flex-direction: column;
 }
-
+.Sidebar-Component-Profiledetails-Namecon :nth-child(1){
+    cursor: pointer;
+}
 .Sidebar-Component-Profiledetails-Namecon :nth-child(2) {
     color: var(--secdim);
     transition: 0.2s;

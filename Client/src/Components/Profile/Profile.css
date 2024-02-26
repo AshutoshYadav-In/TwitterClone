@@ -1,0 +1,43 @@
+.Profile-Component{
+    display: flex;
+    height: 100vh;
+    color: var(--sec);
+    padding: 0rem 20rem;
+    border-right: 1px solid var(--border);
+}
+/* media queries */
+@media (min-width: 1200px) and (max-width: 1400px) {
+    .Profile-Component{
+        padding: 0rem 16rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .Profile-Component{
+        padding: 0rem 9rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .Profile-Component{
+        padding: 0rem 4rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .Profile-Component{
+        padding: 0rem 0rem;
+    }
+}
+
+@media (min-width: 420px) and (max-width: 576px) {
+    .Profile-Component{
+        padding: 0rem 0rem;
+    }
+}
+
+@media (min-width: 310px) and (max-width: 420px) {
+    .Profile-Component{
+        padding: 0rem 0rem;
+    }
+}
