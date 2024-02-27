@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import "./Profiledetails.css";
+import { Link } from "react-router-dom";
 function Profiledetails() {
   const[ToggleOptions, SetToggleOptions] = useState('posts');
        //function for options(post,replies,likes)
        const ToggleOptionsFunc = (e)=> {
       SetToggleOptions(e)
        }
-       console.log(ToggleOptions)
-
   return (
     <div className="Profiledetails-Component">
       <div className="Profiledetails-Component-Top">
@@ -35,14 +34,14 @@ function Profiledetails() {
             <p>Vfx Artist || Frontned Web Developer</p>
           </div>
           <div className="PC-TOP-Followcon">
-            <div>
+            <Link to= '/info/Following'>
               <p>23</p>
               <p>Following</p>
-            </div>
-            <div>
+            </Link>
+            <Link to="/info/Followers">
               <p>36</p>
               <p>Followers</p>
-            </div>
+            </Link>
           </div>
           <div className="PC-TOP-Options">
             <p onClick={() => ToggleOptionsFunc("posts")} className={ToggleOptions === "posts"? "PC-Active" :""}>Posts</p>

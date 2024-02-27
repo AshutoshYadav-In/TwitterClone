@@ -1,4 +1,5 @@
 import {React, useContext} from 'react';
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons'; 
@@ -20,41 +21,42 @@ function Sidebar() {
         <FontAwesomeIcon icon={faX} style={{color: "#e7e9ea",}} onClick={handleSidebarToggle}/>
             <div className='Sidebar-Component-Profiledetails'>
              <div className='Sidebar-Component-Profiledetails-Upper'>
-              <div className='Sidebar-Component-Profiledetails-Upper-Imagecon'>
+              <Link to="/profile" className='Sidebar-Component-Profiledetails-Upper-Imagecon'>
                <img src="https://res.cloudinary.com/deeji7ttf/image/upload/v1706339303/Nextcartassets/l2ar6zznkqmqxorjben5.jpg" alt="" />
-              </div>
-               <div className='Sidebar-Component-Profiledetails-Namecon'>
+              </Link>
+               <Link to="/Profile" className='Sidebar-Component-Profiledetails-Namecon'>
                 <p>Ashutosh Yadav</p>
                 <p>@ashopeditz123</p>
-               </div>
+               </Link>
              </div>
              <div className='Sidebar-Component-Profiledetails-Lower'>
-                <div>
+              <Link to="/info/Following">
                     <p>23</p>
                     <p>Following</p>
-                </div>
-                <div>
-                    <p>11</p>
+              </Link>
+              <Link to="/info/Followers">
+                    <p>23</p>
                     <p>Followers</p>
-                </div>
+              </Link>
+               
              </div>
             </div>
-            <div className='Sidebar-Component-Options'>
+            <Link to="/Home" className='Sidebar-Component-Options'>
             <FontAwesomeIcon icon={faHouse} style={{color: "#e7e9ea",}} />
             <p>Home</p>
-            </div>
-            <div className='Sidebar-Component-Options'>
+            </Link>
+            <Link to="/Profile"  className='Sidebar-Component-Options'>
             <FontAwesomeIcon icon={faUser} style={{color: "#e7e9ea",}} />
             <p>View Profile</p>
-            </div>
-            <div className='Sidebar-Component-Options'>
+            </Link>
+            <Link to="/About"  className='Sidebar-Component-Options'>
             <FontAwesomeIcon icon={faCode} style={{color: "#e7e9ea",}} />
             <p>About Developer</p>
-            </div>
-            <div className='Sidebar-Component-Options'>
+            </Link>
+            <Link className='Sidebar-Component-Options'>
             <FontAwesomeIcon icon={faArrowRightFromBracket} style={{color: "#e7e9ea"}} />
             <p>Logout</p>
-            </div>
+            </Link>
             <div className='Sidebar-Component-Post'>
             <FontAwesomeIcon icon={faFeatherPointed} style={{color: "#e7e9ea",}} />
             <p>Post</p>

@@ -17,14 +17,18 @@
 .Header-Component-Container :nth-child(1){
     font-size: 1.5rem;
 }
-.Header-Component-Container :nth-child(2){
+.Header-Component-Container> :nth-child(2){
+    width: 70%;
+}
+.Header-Component-Container> :nth-child(2) input{
     border-radius: 20px;
     border: none;
     background-color: var(--border);
     color: var(--sec);
     padding: 0rem 1rem;
     height: 35px;
-    width: 70%;
+    font-size: 0.85rem;
+    width: 100%;
 }
 .Header-Component-Container :nth-child(3){
     width: 40px;
@@ -54,14 +58,14 @@ cursor: pointer;
 
 @media (min-width: 576px) and (max-width: 768px) {
     .Header-Component-Container{
-        padding: 1.5rem 2rem;
+        padding: 1.5rem 1rem;
       position: relative;
     }
 }
 
 @media (min-width: 420px) and (max-width: 576px) {
-    .Header-Component-Container :nth-child(2){
-     width: 65%;
+    .Header-Component-Container :nth-child(2) input{
+     width: 100%;
      max-height: 32px;
      font-size: 0.8rem;
     }
@@ -87,10 +91,10 @@ cursor: pointer;
 }
 
 @media (min-width: 310px) and (max-width: 420px) {
-    .Header-Component :nth-child(2){
-        width: 65%;
+    .Header-Component :nth-child(2) input{
+        width: 100%;
         max-height: 30px;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
        }
        .Header-Component-Container{
         padding: 1.5rem 1rem;

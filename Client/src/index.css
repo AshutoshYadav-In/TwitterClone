@@ -12,7 +12,7 @@
     font-family: 'Open Sans', sans-serif;
     font-family: 'Poppins', sans-serif;
     --main: rgb(0, 0, 0);
-    --maindim: rgba(0,0,0,0.6);
+    --maindim : #111111;
     --sec: rgb(231,233,234);
     --secdim : rgb(113,118,123);
     --border: rgb(47,51,54);

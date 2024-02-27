@@ -4,8 +4,10 @@ import Signin from './Components/Signin/Signin'
 import Signup from './Components/Signup/Signup';
 import Home from './Components/Home/Home';
 import Profile from './Components/Profile/Profile';
+import Searchcomponent from './Components/Searchcomponent/Searchcomponent';
 import { useState ,createContext} from 'react';
 import Singletweet from './Components/Singletweet/Singletweet';
+import Followerinfo from './Components/Followerinfo/Followerinfo';
 export const appContext = createContext();
 function App() {
   const[AppHelpers, SetAppHelpers] =useState({
@@ -24,6 +26,8 @@ function App() {
       <Route path="/Signup" element={<Signup />} />
       <Route path="/Profile" element={<Profile/>} />
       <Route path='/tweet/:id'  element= {<Singletweet/>}/>
+      <Route path='/Search'  element= {<Searchcomponent/>}/>
+      <Route path='/info/:infotype'  element= {<Followerinfo/>}/>
       </Routes>
     </div>
     </Router>
