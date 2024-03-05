@@ -1,6 +1,8 @@
 import {React, useContext} from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 import './Sidebar.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons'; 
 import { faX , faHouse} from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +10,7 @@ import { faFeatherPointed,faArrowRightFromBracket, faCode } from '@fortawesome/f
 import { appContext } from '../../App';
 function Sidebar() {
   const {AppHelpers, SetAppHelpers} = useContext(appContext);
+  const navigate = useNavigate();
   //handle sidebar toggle 
   const handleSidebarToggle = ()=>{
     SetAppHelpers(prevState => ({
@@ -15,6 +18,21 @@ function Sidebar() {
       toggleforsidebar: !prevState.toggleforsidebar
     }));
   } 
+  //handle add post toggle 
+  const handleAddpostToggle = ()=>{
+    SetAppHelpers(prevState => ({
+      ...prevState,
+      toggleforaddpost: !prevState.toggleforaddpost,
+      toggleforsidebar: !prevState.toggleforsidebar
+    }));
+  } 
+  //logout
+  const logout= ()=>{
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    toast.success("Sign Out Successful");
+    navigate('/signin')
+  }
   return (
     <div className={AppHelpers.toggleforsidebar? 'Sidebar-Component Sidebar-Component-Transition' : "Sidebar-Component"}>
         <div className='Sidebar-Component-Upper'>
@@ -53,11 +71,11 @@ function Sidebar() {
             <FontAwesomeIcon icon={faCode} style={{color: "#e7e9ea",}} />
             <p>About Developer</p>
             </Link>
-            <Link className='Sidebar-Component-Options'>
+            <Link className='Sidebar-Component-Options' onClick={logout}>
             <FontAwesomeIcon icon={faArrowRightFromBracket} style={{color: "#e7e9ea"}} />
             <p>Logout</p>
             </Link>
-            <div className='Sidebar-Component-Post'>
+            <div className='Sidebar-Component-Post' onClick={handleAddpostToggle}>
             <FontAwesomeIcon icon={faFeatherPointed} style={{color: "#e7e9ea",}} />
             <p>Post</p>
             </div>

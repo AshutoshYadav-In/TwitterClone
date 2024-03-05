@@ -1,12 +1,24 @@
 import React from 'react'
+import { useState, useEffect, useRef  } from 'react';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faRetweet } from '@fortawesome/free-solid-svg-icons';
+import { faRetweet,faPen,faX } from '@fortawesome/free-solid-svg-icons';
 import './Tweet.css'
 function Tweet() {
+  const[retweetToggle,setRetweetToggle] = useState({
+    togglefortop:false,
+    toggleforbottom:false
+  });
+//retweet toggle 
+const toggle = (type) => {
+  setRetweetToggle((prevState) => ({
+    ...prevState,
+    [`togglefor${type}`]: !prevState[`togglefor${type}`],
+  }));
+};
   return (
-    <div className='Tweet-Component'>
+    <div className='Tweet-Component' >
       <div className='Tweet-Component-Repost'>
         <FontAwesomeIcon icon={faRetweet} />
         <p> Elon Musk reposted</p>
@@ -17,7 +29,7 @@ function Tweet() {
             <img src="https://res.cloudinary.com/deeji7ttf/image/upload/v1706339303/Nextcartassets/l2ar6zznkqmqxorjben5.jpg" alt="" />
           </div>
         </div>
-        <div className='Tweet-Component-Header '>
+        <div className='Tweet-Component-Header TCH-After '>
           <div className='Tweet-Component-Header-Divider'>
             <div className='Tweet-Component-Header-Divider-Two'>
               <div>
@@ -54,8 +66,21 @@ function Tweet() {
               <p>2</p>
             </div>
             <div>
+            <div onClick={()=>toggle("top")}>
               <FontAwesomeIcon icon={faRetweet} />
               <p>2</p>
+            </div>
+              <div className={retweetToggle.togglefortop? "TCBOT-Absolute" :"TCBOT-Absolute TCBOT-Absolute-Toggle"}>
+              <FontAwesomeIcon icon={faX} onClick={()=>toggle("top")} />
+              <div>
+              <FontAwesomeIcon icon={faRetweet} />
+              <p>Repost</p>
+                </div>
+                <div>
+              <FontAwesomeIcon icon={faPen}/>
+              <p>Quote</p>
+                </div>
+              </div>
             </div>
             <div>
               <FontAwesomeIcon icon={faHeart} />
@@ -90,8 +115,21 @@ function Tweet() {
               <p>2</p>
             </div>
             <div>
+            <div onClick={()=>toggle("bottom")}>
               <FontAwesomeIcon icon={faRetweet} />
               <p>2</p>
+            </div>
+              <div className={retweetToggle.toggleforbottom? "TCBOB-Absolute" :"TCBOB-Absolute TCBOB-Absolute-Toggle"}>
+              <FontAwesomeIcon icon={faX} onClick={()=>toggle("bottom")}/>
+              <div>
+              <FontAwesomeIcon icon={faRetweet} />
+              <p>Repost</p>
+                </div>
+                <div>
+              <FontAwesomeIcon icon={faPen} />
+              <p>Quote</p>
+                </div>
+              </div>
             </div>
             <div>
               <FontAwesomeIcon icon={faHeart} />

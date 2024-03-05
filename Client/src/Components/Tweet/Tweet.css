@@ -1,108 +1,133 @@
-.Tweet-Component{
+.Tweet-Component {
     display: flex;
     padding: 0.5rem 1rem;
     flex-direction: column;
     gap: 0.5rem;
+    background-color: var(--main);
     border-bottom: 1px solid var(--border);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
 }
-.Tweet-Component-Repost{
+.Tweet-Component * {
+    user-select: none;
+  }
+.Tweet-Component-Repost {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     color: var(--secdim);
 }
-.Tweet-Component-Container{
+
+.Tweet-Component-Container {
     display: flex;
     gap: 1rem;
     align-items: flex-start;
 }
-.Tweet-Component-Content{
- margin-top: 1rem;   
+
+.Tweet-Component-Content {
+    margin-top: 1rem;
 }
-.Tweet-Component-Imagecon :nth-child(1){
+
+.Tweet-Component-Imagecon :nth-child(1) {
     width: 40px;
     height: 40px;
     overflow: hidden;
     border-radius: 50%;
     cursor: pointer;
 }
-.Tweet-Component-Imagecon :nth-child(1) img{
+
+.Tweet-Component-Imagecon :nth-child(1) img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.Tweet-Component-Imagecon:hover{
+
+.Tweet-Component-Imagecon:hover {
     cursor: pointer;
 }
-.Tweet-Component-Header{
+
+.Tweet-Component-Header {
     display: flex;
     gap: 1rem;
     cursor: pointer;
     flex-direction: column;
 }
-.TCH-After{
+
+.TCH-After {
     position: relative;
 }
-.TCH-After::after{
- position: absolute;
- width: 2px;
- content: '';
-height: 100%;
-z-index: -1;
-background-color: var(--border);
-transform: translate(-38px, 35px);
+
+.TCH-After::after {
+    position: absolute;
+    width: 2px;
+    content: '';
+    height: 100%;
+    z-index: -1;
+    background-color: var(--border);
+    transform: translate(-38px, 35px);
 }
-.Tweet-Component-Header-Divider{
+
+.Tweet-Component-Header-Divider {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
 }
-.Tweet-Component-Header-Divider-Two{
+
+.Tweet-Component-Header-Divider-Two {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.Tweet-Component-Header-Divider-Two> :nth-child(1) :nth-child(1){
-max-width: 65%;
-white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; 
+
+.Tweet-Component-Header-Divider-Two> :nth-child(1) :nth-child(1) {
+    max-width: 65%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
 }
-.Tweet-Component-Header-Divider-Two> :nth-child(2){
+
+.Tweet-Component-Header-Divider-Two> :nth-child(2) {
     color: var(--secdim);
     font-size: 1.1rem;
     transition: 0.2s;
 }
-.Tweet-Component-Header-Divider-Two> :nth-child(2):hover{
+
+.Tweet-Component-Header-Divider-Two> :nth-child(2):hover {
     cursor: pointer;
     color: var(--red);
     filter: drop-shadow(0rem 0rem 0.5rem rgb(255, 0, 0));
 }
-.Tweet-Component-Header-Divider-Two> :nth-child(1){
+
+.Tweet-Component-Header-Divider-Two> :nth-child(1) {
     display: flex;
     gap: 1rem;
 }
-.Tweet-Component-Header-Divider-Two> :nth-child(1) a{
+
+.Tweet-Component-Header-Divider-Two> :nth-child(1) a {
     color: var(--sec);
     font-weight: 600;
 }
-.Tweet-Component-Header-Divider-Two> :nth-child(1) p{
+
+.Tweet-Component-Header-Divider-Two> :nth-child(1) p {
     color: var(--secdim);
 }
-.Tweet-Component-Postimage{
+
+.Tweet-Component-Postimage {
     width: 80%;
     max-height: 80vh;
     overflow: hidden;
 }
-.Tweet-Component-Postimage img{
+
+.Tweet-Component-Postimage img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 15px;
 
 }
-.Tweet-Component-For-Replies{
+
+.Tweet-Component-For-Replies {
     display: flex;
     gap: 0.2rem;
     flex-direction: column;
@@ -110,249 +135,377 @@ white-space: nowrap;
     border: 1px solid var(--border);
     border-radius: 15px;
 }
-.Tweet-Component-For-Replies-Top{
+
+.Tweet-Component-For-Replies-Top {
     display: flex;
     gap: 1rem;
     align-items: center;
     flex-wrap: wrap;
 }
-.Tweet-Component-For-Replies-Top> :nth-child(1){
+
+.Tweet-Component-For-Replies-Top> :nth-child(1) {
     width: 35px;
     height: 35px;
     overflow: hidden;
 }
-.Tweet-Component-For-Replies-Top> :nth-child(1) img{
+
+.Tweet-Component-For-Replies-Top> :nth-child(1) img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
-.Tweet-Component-For-Replies-Top> :nth-child(2){
-   color: var(--sec);
-   font-weight: 600;
-   max-width: 65%;
-white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; 
+
+.Tweet-Component-For-Replies-Top> :nth-child(2) {
+    color: var(--sec);
+    font-weight: 600;
+    max-width: 65%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.Tweet-Component-For-Replies-Top> :nth-child(3){
+
+.Tweet-Component-For-Replies-Top> :nth-child(3) {
     color: var(--secdim);
 }
-.Tweet-Component-For-Replies-Bottom{
+
+.Tweet-Component-For-Replies-Bottom {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
-.Tweet-Component-For-Replies-Bottom :nth-child(2){
+
+.Tweet-Component-For-Replies-Bottom :nth-child(2) {
     width: 100%;
     max-height: 80vh;
     overflow: hidden;
 }
-.Tweet-Component-For-Replies-Bottom :nth-child(2) img{
+
+.Tweet-Component-For-Replies-Bottom :nth-child(2) img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-   border-radius: 15px;
+    border-radius: 15px;
 }
-.Tweet-Component-Bottom-Options{
+
+.Tweet-Component-Bottom-Options {
     display: flex;
     justify-content: space-between;
 }
-.Tweet-Component-Bottom-Options> :nth-child(n){
-display: flex;
-align-items: center;
-gap: 0.5rem;
-cursor: pointer;
-color:  var(--secdim);
-transition: 0.2s;
+
+.Tweet-Component-Bottom-Options> :nth-child(n) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--secdim);
+    transition: 0.2s;
 }
-.Tweet-Component-Bottom-Options> :nth-child(1):hover{
+
+.Tweet-Component-Bottom-Options> :nth-child(2) {
+    position: relative;
+}
+
+.Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(2) {
+    display: flex;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 2;
+    position: absolute;
+    flex-direction: column;
+    background-color: var(--main);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    filter: drop-shadow(0 0 5px var(--border));
+}
+.TCBOT-Absolute-Toggle{
+    display: none !important;
+}
+.TCBOT-Absolute > *:first-child,
+.TCBOB-Absolute > *:first-child{
+padding: 0.5rem 0rem 0.2rem 0rem;
+font-size: 0.8rem;
+transition: 0.2s;
+color: var(--secdim);
+}
+.TCBOT-Absolute > :nth-child(1):hover,
+.TCBOB-Absolute > :nth-child(1):hover{
+color: var(--sec);
+background-color: var(--maindim);
+}
+
+.TCBOB-Absolute-Toggle{
+    display: none !important;
+}
+.Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(2)> div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: 0.2s;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+.Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(2)> div:hover{
+    background-color: var(--maindim);
+    color: var(--sec);
+}
+.Tweet-Component-Bottom-Options> :nth-child(1):hover {
     color: var(--blue) !important;
     filter: drop-shadow(0rem 0rem 0.5rem rgba(29, 155, 240, 1));
 }
-.Tweet-Component-Bottom-Options> :nth-child(2):hover{
-color: #6af06a;
+.Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(1){
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(1):hover {
+    color: #6af06a;
     filter: drop-shadow(0rem 0rem 0.5rem rgba(106, 240, 106, 1));
 }
-.Tweet-Component-Bottom-Options> :nth-child(3):hover{
+
+.Tweet-Component-Bottom-Options> :nth-child(3):hover {
     color: #ff3a7c;
-        filter: drop-shadow(0rem 0rem 0.5rem rgba(255, 58, 124, 1));
-    }
+    filter: drop-shadow(0rem 0rem 0.5rem rgba(255, 58, 124, 1));
+}
+
 /* media queries */
 @media (min-width: 1200px) and (max-width: 1400px) {
-    .Tweet-Component-Postimage{
+    .Tweet-Component-Postimage {
         width: 90%;
         max-height: 80vh;
         overflow: hidden;
     }
-    .Tweet-Component-For-Replies-Top{
+
+    .Tweet-Component-For-Replies-Top {
         row-gap: 0.3rem;
     }
 }
 
 @media (min-width: 992px) and (max-width: 1200px) {
-    .Tweet-Component-Postimage{
+    .Tweet-Component-Postimage {
         width: 100%;
         max-height: 80vh;
         overflow: hidden;
     }
-    .Tweet-Component-Repost :nth-child(n){
-    font-size: 0.97rem;
-    }
-    .Tweet-Component-Header-Divider{
+
+    .Tweet-Component-Repost :nth-child(n) {
         font-size: 0.97rem;
     }
-    .Tweet-Component-Header-Divider-Two> :nth-child(2){
+
+    .Tweet-Component-Header-Divider {
+        font-size: 0.97rem;
+    }
+
+    .Tweet-Component-Header-Divider-Two> :nth-child(2) {
         font-size: 1.05rem;
     }
-    .Tweet-Component-For-Replies{
+
+    .Tweet-Component-For-Replies {
         font-size: 0.97rem;
     }
-    .Tweet-Component-For-Replies-Top{
+
+    .Tweet-Component-For-Replies-Top {
         row-gap: 0.3rem;
     }
-    .Tweet-Component-Bottom-Options> :nth-child(n){
+
+    .Tweet-Component-Bottom-Options> :nth-child(n) {
         font-size: 0.97rem;
+    }
+    .Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(2)> div {
+        font-size: 0.85rem;
     }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
-    .Tweet-Component-Postimage{
+    .Tweet-Component-Postimage {
         width: 100%;
         max-height: 80vh;
         overflow: hidden;
     }
-    .Tweet-Component-Repost :nth-child(n){
-    font-size: 0.92rem;
-    }
-    .Tweet-Component-Header-Divider{
+
+    .Tweet-Component-Repost :nth-child(n) {
         font-size: 0.92rem;
     }
-    .Tweet-Component-Header-Divider-Two> :nth-child(2){
+
+    .Tweet-Component-Header-Divider {
+        font-size: 0.92rem;
+    }
+
+    .Tweet-Component-Header-Divider-Two> :nth-child(2) {
         font-size: 1rem;
     }
-    .Tweet-Component-For-Replies{
+
+    .Tweet-Component-For-Replies {
         font-size: 0.92rem;
     }
-    .Tweet-Component-For-Replies-Top{
+
+    .Tweet-Component-For-Replies-Top {
         row-gap: 0.3rem;
     }
-    .Tweet-Component-Bottom-Options> :nth-child(n){
+
+    .Tweet-Component-Bottom-Options> :nth-child(n) {
         font-size: 0.92rem;
+    }
+    .Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(2)> div {
+        font-size: 0.8rem;
     }
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
-    .Tweet-Component-Postimage{
+    .Tweet-Component-Postimage {
         width: 80%;
         max-height: 80vh;
         overflow: hidden;
     }
-    .Tweet-Component-Repost :nth-child(n){
-    font-size: 0.9rem;
-    }
-    .Tweet-Component-Header-Divider{
+
+    .Tweet-Component-Repost :nth-child(n) {
         font-size: 0.9rem;
     }
-    .Tweet-Component-Header-Divider-Two> :nth-child(2){
+
+    .Tweet-Component-Header-Divider {
+        font-size: 0.9rem;
+    }
+
+    .Tweet-Component-Header-Divider-Two> :nth-child(2) {
         font-size: 1rem;
     }
-    .Tweet-Component-For-Replies{
+
+    .Tweet-Component-For-Replies {
         font-size: 0.9rem;
     }
-    .Tweet-Component-For-Replies-Top{
+
+    .Tweet-Component-For-Replies-Top {
         row-gap: 0.3rem;
     }
-    .Tweet-Component-Bottom-Options> :nth-child(n){
+
+    .Tweet-Component-Bottom-Options> :nth-child(n) {
         font-size: 0.9rem;
     }
-   
+
     .Tweet-Component {
         padding: 1rem 1rem;
         position: relative;
+    }
+    .Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(2)> div {
+        font-size: 0.8rem;
     }
 }
 
 @media (min-width: 420px) and (max-width: 576px) {
-    .Tweet-Component-Postimage{
+    .Tweet-Component-Postimage {
         width: 100%;
         max-height: 60vh;
         overflow: hidden;
     }
-    .Tweet-Component-Repost :nth-child(n){
-    font-size: 0.87rem;
-    }
-    .Tweet-Component-Header-Divider{
+
+    .Tweet-Component-Repost :nth-child(n) {
         font-size: 0.87rem;
-    }
-    .Tweet-Component-Header-Divider-Two> :nth-child(2){
-        font-size: 0.95rem;
-    }
-    .Tweet-Component-For-Replies{
-        font-size: 0.87rem;
-    }
-    .Tweet-Component-For-Replies-Top{
-        row-gap: 0.3rem;
-    }
-    .Tweet-Component-Bottom-Options> :nth-child(n){
-        font-size: 0.87rem;
-    }
-    .Tweet-Component {
-        padding: 1rem  1rem;
-        position: relative;
-    }
-    .Tweet-Component-For-Replies-Bottom :nth-child(2){
-        max-height: 70vh;
     }
 
-}
+    .Tweet-Component-Header-Divider {
+        font-size: 0.87rem;
+    }
 
-@media (min-width: 310px) and (max-width: 420px) {
-    .Tweet-Component-Postimage{
-        width: 100%;
-        max-height: 60vh;
-        overflow: hidden;
-    }
-    .Tweet-Component-Repost :nth-child(n){
-    font-size: 0.85rem;
-    }
-    .Tweet-Component-Header-Divider{
-        font-size: 0.85rem;
-    }
-    .Tweet-Component-Header-Divider-Two> :nth-child(2){
+    .Tweet-Component-Header-Divider-Two> :nth-child(2) {
         font-size: 0.95rem;
     }
-    .Tweet-Component-For-Replies{
-        font-size: 0.85rem;
+
+    .Tweet-Component-For-Replies {
+        font-size: 0.87rem;
     }
-    .Tweet-Component-For-Replies-Top{
+
+    .Tweet-Component-For-Replies-Top {
         row-gap: 0.3rem;
     }
-    .Tweet-Component-Bottom-Options> :nth-child(n){
-        font-size: 0.85rem;
+
+    .Tweet-Component-Bottom-Options> :nth-child(n) {
+        font-size: 0.87rem;
     }
+
     .Tweet-Component {
         padding: 1rem 1rem;
         position: relative;
     }
-    .Tweet-Component-Container{
+
+    .Tweet-Component-For-Replies-Bottom :nth-child(2) {
+        max-height: 70vh;
+    }
+    .Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(2)> div {
+        font-size: 0.75rem;
+    }
+    .TCBOT-Absolute > *:first-child,
+    .TCBOB-Absolute > *:first-child{
+        font-size: 0.7rem;
+    }
+}
+
+@media (min-width: 310px) and (max-width: 420px) {
+    .Tweet-Component-Postimage {
+        width: 100%;
+        max-height: 60vh;
+        overflow: hidden;
+    }
+
+    .Tweet-Component-Repost :nth-child(n) {
+        font-size: 0.85rem;
+    }
+
+    .Tweet-Component-Header-Divider {
+        font-size: 0.85rem;
+    }
+
+    .Tweet-Component-Header-Divider-Two> :nth-child(2) {
+        font-size: 0.95rem;
+    }
+
+    .Tweet-Component-For-Replies {
+        font-size: 0.85rem;
+    }
+
+    .Tweet-Component-For-Replies-Top {
+        row-gap: 0.3rem;
+    }
+
+    .Tweet-Component-Bottom-Options> :nth-child(n) {
+        font-size: 0.85rem;
+    }
+
+    .Tweet-Component {
+        padding: 1rem 1rem;
+        position: relative;
+    }
+
+    .Tweet-Component-Container {
         gap: 0.5rem;
     }
-    .Tweet-Component-For-Replies-Bottom :nth-child(2){
+
+    .Tweet-Component-For-Replies-Bottom :nth-child(2) {
         max-height: 60vh;
     }
-    .Tweet-Component-For-Replies-Top> :nth-child(1){
+
+    .Tweet-Component-For-Replies-Top> :nth-child(1) {
         width: 30px;
         height: 30px;
         overflow: hidden;
     }
-    .Tweet-Component-Imagecon :nth-child(1){
+
+    .Tweet-Component-Imagecon :nth-child(1) {
         width: 35px;
         height: 35px;
         overflow: hidden;
         border-radius: 50%;
         cursor: pointer;
     }
-    .TCH-After::after{
-       transform: translate(-28px, 30px);
-       }
+
+    .TCH-After::after {
+        transform: translate(-28px, 30px);
+    }
+    .Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(2)> div {
+        font-size: 0.7rem;
+    }
+    .TCBOT-Absolute > *:first-child,
+.TCBOB-Absolute > *:first-child{
+    font-size: 0.7rem;
+}
 }

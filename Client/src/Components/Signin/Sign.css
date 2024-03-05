@@ -38,10 +38,18 @@ color: var(--sec);
     flex-direction: column;
     gap: 0.5rem;
 }
+.Form-Options> :nth-child(3){
+    color: var(--error);
+    font-size: 0.75rem;
+}
 .Sign-Component-Right form .Form-Options input{
     width: 100%;
     height: 32px;
     padding: 0rem 0.5rem;
+}
+.Form-Options> input:focus{
+    border: 2px solid var(--blue);
+
 }
 .Sign-Component-Right form button{
     padding: 0.3rem 0rem;
