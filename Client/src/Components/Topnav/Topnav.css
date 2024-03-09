@@ -9,7 +9,7 @@
     position: sticky;
     top: 0;
     background-color: var(--main);
-    z-index: 2;
+    z-index: 3;
 }
 .Topnav-Component> svg{
     font-size: 1.2rem;

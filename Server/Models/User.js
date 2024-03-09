@@ -30,6 +30,12 @@ const userSchema = new Schema({
     type: String,
     default: '', 
   },
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], 
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  tweets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tweet' }],
+  reposts:[{type: mongoose.Schema.Types.ObjectId, ref: 'Tweet' }],
+  likes:[{type: mongoose.Schema.Types.ObjectId, ref: 'Tweet' }],
+  deleted: { type: Boolean, default: false },
 });
 
 const Usermodel = mongoose.model("User", userSchema);

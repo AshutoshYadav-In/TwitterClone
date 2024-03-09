@@ -90,6 +90,9 @@ const signinUser =async(req,res)=>{
               .json({ message: "Please provide email and password" });
           }
           const user = await userModel.findOne({ email });
+          if(user.deleted === true){
+            return res.status(401).json({ message: "User not found" });
+          }
           if (!user) {
             return res.status(401).json({ message: "Invalid credentials" });
           }

@@ -50,13 +50,13 @@ function App() {
       <Editprofile/>
       <div className={AppHelpers.toggleforaddpost || AppHelpers.toggleforeditprofile || AppHelpers.toggleforloading? 'App-Opacity' : ""}>
       <Routes>
-      <Route path='/' element={<Navigate to='/Signin' />} />
-      <Route path="/Signin" element={<Signin />} />
-      <Route path="/Signup" element={<Signup />} /> 
-      <Route path="/Home" element={<ProtectedRoute element={Home} />} />
-      <Route path="/profile" element={<ProtectedRoute element={Profile} />} />
+      <Route path='/' element={<Navigate to='/signin' />} />
+      <Route path="/signin" element={<Signin />} />
+      <Route path="/signup" element={<Signup />} /> 
+      <Route path="/home" element={<ProtectedRoute element={Home} />} />
+      <Route path="/profile/:id" element={<ProtectedRoute element={Profile} />} />
       <Route path="/tweet/:id" element={<ProtectedRoute element={Singletweet} />} />
-      <Route path="/Search" element={<ProtectedRoute element={Searchcomponent} />} />
+      <Route path="/search" element={<ProtectedRoute element={Searchcomponent} />} />
       <Route path="/info/:infotype" element={<ProtectedRoute element={Followerinfo} />} />
       </Routes>
       </div>
