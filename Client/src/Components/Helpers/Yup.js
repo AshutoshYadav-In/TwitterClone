@@ -43,3 +43,9 @@ export const editProfileSchema = (isChecked) => {
         })
     });
 };
+
+export const tweetValidationSchema = Yup.object().shape({
+  tweetText: Yup.string()
+    .required('Tweet text is required')
+    .max(200, 'Maximum 200 words allowed')
+});

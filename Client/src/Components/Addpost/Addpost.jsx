@@ -1,14 +1,22 @@
 import React from 'react'
 import './Addpost.css'
 import { useRef, useState,useContext } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import TextareaAutosize from 'react-textarea-autosize';
+import { BASE_URL } from '../Helpers/Base_Url.js';
 import { appContext } from '../../App';
+import { tweetValidationSchema } from '../Helpers/Yup.js';
 function Addpost() {
 
-    const {AppHelpers, SetAppHelpers} = useContext(appContext);
+    const {AppHelpers, SetAppHelpers,currentUser} = useContext(appContext);
+    const [userDetails, setUserDetails] = useState({
+        tweetText: "",
+    });
     //handle add post  toggle 
     const handleAddpostToggle = ()=>{
       SetAppHelpers(prevState => ({
@@ -45,30 +53,104 @@ function Addpost() {
             file: null
         })
     }
+     // handle inout change
+    const handleTextChange = (e) => {
+        setUserDetails({
+            ...userDetails,
+            tweetText: e.target.value
+        });
+    };
+//handle submit
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    const toggleLoading = () => {
+        SetAppHelpers(prevState => ({
+            ...prevState,
+            toggleforloading: !prevState.toggleforloading
+        }))
+    };
+    try {
+        await tweetValidationSchema.validate(userDetails, { abortEarly: false });
+        try {
+            toggleLoading();
+            const formData = new FormData;
+            formData.append("tweetText", userDetails.tweetText)
+            formData.append("image", ImageState.file);
+            const token = sessionStorage.getItem('token');
+            const headers = {
+                'Authorization': `Bearer ${token}`,
+            };
+            const response = await axios.post(`${BASE_URL}/api/user/posttweet/${AppHelpers.tweetvalue}` , formData , {headers});
+            if(response.status === 201){
+                toast.success(`${response.data.message}`);
+                setUserDetails({
+                    tweetText: ""
+                });
+                SetImageState({
+                    preview: '',
+                    file: null
+                });
+                toggleLoading();
+                handleAddpostToggle()
+            }
+            SetAppHelpers(prevState => ({
+                ...prevState,
+                 toggleforreload: !prevState.toggleforreload
+              }));
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                toast.warn(`${error.response.data.message}`);
+            } else {
+                toast.error(`${error.response.data.message}`);
+            }
+            toggleLoading();
+        }
+    }
+    catch (errors) {
+        const validationErrors = {};
+        errors.inner.forEach((error) => {
+          validationErrors[error.path] = error.message;
+        });
+        setUserDetails(prevState => ({
+          ...prevState,
+          errors: validationErrors
+        }));
+    }
+}
     return (
         <div className= {AppHelpers.toggleforaddpost? "Addpost-Component-Show Addpost-Component" :"Addpost-Component"}>
              <FontAwesomeIcon icon={faX} style={{ color: "#e7e9ea", }} onClick={handleAddpostToggle}/>
-            <form className='Home-Component-WriteTweet' style={{border:"none"}}>
-                <div className='Home-Component-WriteTweet-Left'>
-                    <div>
-                        <img src="https://res.cloudinary.com/deeji7ttf/image/upload/v1706339303/Nextcartassets/l2ar6zznkqmqxorjben5.jpg" alt="" />
+             <form className='Home-Component-WriteTweet' onSubmit={handleSubmit} style={{border:"none"}}>
+                    <div className='Home-Component-WriteTweet-Left'>
+                        <div>
+                        {
+                currentUser?.profileimage === '' ? <img
+                  src="https://vectorified.com/images/guest-icon-3.png"
+                  alt="image"
+                /> : <img
+                  src={currentUser?.profileimage}
+                  alt="image"
+                />
+              }
+                        </div>
                     </div>
-                </div>
-                <div className='Home-Component-WriteTweet-Right'>
-                    <TextareaAutosize placeholder='Type Something!' id='' />
-                    {ImageState.preview !== "" && <div className='Home-Component-WriteTweet-Right-Imagecon' style={{maxHeight:"60vh"}}>
-                        <FontAwesomeIcon icon={faX} style={{ color: "#e7e9ea", }} onClick={handleImageRemove} />
-                        {ImageState.preview && <img src={ImageState.preview}  alt="Selected" />}
-                    </div>}
-                    <div className='Home-Component-Buttons-Con'>
-                        <label onClick={handleImageClick}>
-                            <FontAwesomeIcon icon={faImage} />
-                        </label>
-                        <button>Post</button>
+                    <div className='Home-Component-WriteTweet-Right'>
+                        <TextareaAutosize placeholder='Type Something!' spellCheck="false" value={userDetails.tweetText}
+                            onChange={handleTextChange} />
+                               {userDetails.errors?.tweetText && <p className="error" style={{ color: 'var(--error)', fontSize: '0.7rem' }}>{userDetails.errors.tweetText}</p>}
+                        {ImageState.preview !== "" && <div className='Home-Component-WriteTweet-Right-Imagecon'>
+                            <FontAwesomeIcon icon={faX} style={{ color: "#e7e9ea", }} onClick={handleImageRemove} />
+                            {ImageState.preview && <img src={ImageState.preview} alt="Selected" />}
+                        </div>}
+                        <div className='Home-Component-Buttons-Con'>
+                            <label onClick={handleImageClick}>
+                                <FontAwesomeIcon icon={faImage} />
+                            </label>
+                            <button type='submit'>Post</button>
+                        </div>
                     </div>
-                </div>
-                <input type="file" accept="image/*" ref={inputRef} style={{ display: 'none' }} onChange={handleFileChange} />
-            </form>
+                    <input type="file" accept="image/*" ref={inputRef} style={{ display: 'none' }} onChange={handleFileChange} />
+                </form>
 
         </div>
     )

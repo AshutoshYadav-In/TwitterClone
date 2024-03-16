@@ -21,6 +21,7 @@
     --hoverblue: rgba(29,155,240,0.8);
     --red: #ff4141;
     --error: #ff5500;
+    --tweethover: #0f0f0f;
 }
 body{
     background-color: var(--main);
@@ -33,7 +34,7 @@ position: relative;
   opacity: 0.3;
   pointer-events: none;
 }
-@media (min-width: 420px) and (max-width: 576px) {
+@media (min-width: 310px) and (max-width: 576px) {
   .Toastify__toast-container {
     width: 80vw !important;
     padding: 0;

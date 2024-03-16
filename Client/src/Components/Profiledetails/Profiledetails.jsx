@@ -1,4 +1,4 @@
-import React, { useState,useContext, useEffect } from "react";
+import React, { useState,useContext, useEffect,useCallback } from "react";
 import "./Profiledetails.css";
 import { Link,useParams } from "react-router-dom";
 import axios from "axios"
@@ -6,15 +6,31 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { appContext } from '../../App';
 import { BASE_URL } from '../Helpers/Base_Url';
-function Profiledetails() {
+function Profiledetails(props) {
   const{id} = useParams()
   const {SetAppHelpers,currentUser} = useContext(appContext);
   const[userDetails,setUserDetails] =useState();
+  const[followInfo,setFollowInfo] =useState();
   const[ToggleOptions, SetToggleOptions] = useState('posts');
        //function for options(post,replies,likes)
        const ToggleOptionsFunc = (e)=> {
       SetToggleOptions(e)
-       }
+    }
+  
+    //handle loading toggle 
+    const handleLoading = ()=>{
+      SetAppHelpers(prevState => ({
+        ...prevState,
+        toggleforloading: !prevState.toggleforloading
+      }));
+    } 
+
+    useEffect(() => {
+      if (ToggleOptions !== props.tweetType) {
+         props.SetTweetType(ToggleOptions);
+      }
+     }, [ToggleOptions, props.tweetType]);
+     
        //toggle for edit profile
 const handleToggleEditProfile = ()=>{
   SetAppHelpers(prevState => ({
@@ -22,24 +38,65 @@ const handleToggleEditProfile = ()=>{
     toggleforeditprofile: !prevState.toggleforeditprofile
   }));
 } 
+
+// calling fetch data
+const fetchData = async () => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+    };
+    const response = await axios.get(`${BASE_URL}/api/user/getuser/${id}`, {headers});
+    setUserDetails(response.data.user);
+  } catch (error) {
+    console.log(error);
+  }
+};
 useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const token = sessionStorage.getItem('token');
-      const headers = {
-          'Authorization': `Bearer ${token}`,
-      };
-      const response = await axios.get(`${BASE_URL}/api/user/getuser/${id}`, {headers});
-      setUserDetails(response.data.user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   fetchData();
+}, [currentUser,id]);
 
-}, [currentUser]);
+//fetch follow function 
+const getFollowInfo = async()=>{
+  try{
+    handleLoading();
+    const token = sessionStorage.getItem('token');
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+    };
+    const response = await axios.get(`${BASE_URL}/api/user/followinfo` , {headers});
+    if(response.status===200){
+     handleLoading();
+    }
+    setFollowInfo(response.data)
+  }catch(error){
+    toast.error(`${error.response.data.message}`)
+    handleLoading();
+  }
+  }
+useEffect(()=>{
+getFollowInfo();
+},[])
 
+//follow toggle
+const followToggle = async()=>{
+  try{
+    handleLoading();
+    const token = sessionStorage.getItem('token');
+    const headers = {
+        'Authorization': `Bearer ${token}`,
+    };
+    const response = await axios.get(`${BASE_URL}/api/user/follow/${id}`, {headers});
+    if(response.status === 200){
+     handleLoading();
+     getFollowInfo();
+     fetchData();
+    }
+  }catch(error){ 
+
+  handleLoading()    
+  }
+}
   return (
     <div className="Profiledetails-Component">
       <div className="Profiledetails-Component-Top">
@@ -65,16 +122,16 @@ useEffect(() => {
         <div className="PC-TOP-Container">
           <div className="PC-Editprofile">
             {
-              currentUser?._id === id ?<button onClick={handleToggleEditProfile}>Edit Profile</button> : <button>Follow</button>
+              currentUser?._id === id ?<button onClick={handleToggleEditProfile}>Edit Profile</button> : <button onClick={followToggle}>{followInfo?.following?.some(user => user._id === id)? "Unfollow" : "Follow"}</button>
             }
           </div>
           <div className="PC-TOP-Namecon">
-            <p>{userDetails?.name}</p>
-            <p>@{userDetails?.username}</p>
+            <p>{userDetails?.name || "Name"}</p>
+            <p>@{userDetails?.username || "username"}</p>
           </div>
          {
            userDetails?.bio === '' ? null: <div className="PC-TOP-Biocon">
-           <p>{userDetails?.bio}</p>
+           <p>{userDetails?.bio || "Bio"}</p>
          </div>
          }
           <div className="PC-TOP-Followcon">

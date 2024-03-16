@@ -23,7 +23,7 @@ function Topnav(props) {
     <div className='Topnav-Component'>
       <FontAwesomeIcon icon={faArrowLeft} style={{ color: "#e7e9ea", }} onClick={handleBackButtonClick}  />
       {
-        props.toggle == "name" ? <p>{props.info}</p> : <input type="text" placeholder='Search X' />
+        props.toggle == "name" ? <p>{props.name}</p> : <input type="text" placeholder='Search X' />
       }
     </div>
   )

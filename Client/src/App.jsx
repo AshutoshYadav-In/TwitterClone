@@ -13,6 +13,7 @@ import Editprofile from './Components/Editprofile/Editprofile';
 import { useState ,createContext,useEffect} from 'react';
 import Singletweet from './Components/Singletweet/Singletweet';
 import Followerinfo from './Components/Followerinfo/Followerinfo';
+import Confirmdelete from './Components/Confirmdelete/Confirmdelete';
 export const appContext = createContext();
 function App() {
   const [currentUser, setCurrentUser] =useState();
@@ -24,7 +25,14 @@ function App() {
     toggleforsidebar : false,
     toggleforaddpost: false,
     toggleforeditprofile: false,
-    toggleforloading:false
+    toggleforloading:false,
+    toggleforeload:true,
+    togglefordeletion:false,
+    tweetdeletedetails:{
+    id: "",
+    type:""
+    },
+    tweetvalue:"none", 
   });
   return (
     <appContext.Provider value={{ AppHelpers, SetAppHelpers,currentUser }}>
@@ -48,7 +56,8 @@ function App() {
           />
       <Addpost/>
       <Editprofile/>
-      <div className={AppHelpers.toggleforaddpost || AppHelpers.toggleforeditprofile || AppHelpers.toggleforloading? 'App-Opacity' : ""}>
+      <Confirmdelete/>
+      <div className={AppHelpers.toggleforaddpost || AppHelpers.toggleforeditprofile ||AppHelpers.togglefordeletion || AppHelpers.toggleforloading? 'App-Opacity' : ""}>
       <Routes>
       <Route path='/' element={<Navigate to='/signin' />} />
       <Route path="/signin" element={<Signin />} />

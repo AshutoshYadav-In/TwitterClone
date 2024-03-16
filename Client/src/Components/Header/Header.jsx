@@ -5,7 +5,7 @@ import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import {Link} from "react-router-dom";
 import { appContext } from '../../App';
 function Header() {
-  const {AppHelpers, SetAppHelpers} = useContext(appContext);
+  const {AppHelpers, SetAppHelpers,currentUser} = useContext(appContext);
   //handle sidebar toggle 
   const handleSidebarToggle = ()=>{
     SetAppHelpers(prevState => ({
@@ -21,7 +21,15 @@ function Header() {
       <input type="text" placeholder='Search X' />
       </Link>
       <div onClick={handleSidebarToggle}>
-        <img src="https://res.cloudinary.com/deeji7ttf/image/upload/v1706339303/Nextcartassets/l2ar6zznkqmqxorjben5.jpg" alt="" />
+      {
+                currentUser?.profileimage === '' ? <img
+                  src="https://vectorified.com/images/guest-icon-3.png"
+                  alt="image"
+                /> : <img
+                  src={currentUser?.profileimage}
+                  alt="image"
+                />
+              }
       </div>
       </div>
     </div>

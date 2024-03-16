@@ -6,10 +6,15 @@
     background-color: var(--main);
     border-bottom: 1px solid var(--border);
     -webkit-tap-highlight-color: transparent;
-    -webkit-tap-highlight-color: transparent;
 }
 .Tweet-Component * {
     user-select: none;
+  }
+  .Tweet-Component a{
+    color: var(--sec);
+  }
+  .Tweet-Component-Display{
+    display: none;
   }
 .Tweet-Component-Repost {
     display: flex;
@@ -27,13 +32,16 @@
 .Tweet-Component-Content {
     margin-top: 1rem;
 }
-
+.Tweet-Component-Imagecon{
+    z-index: 2;
+}
 .Tweet-Component-Imagecon :nth-child(1) {
     width: 40px;
     height: 40px;
     overflow: hidden;
     border-radius: 50%;
     cursor: pointer;
+    background-color: var(--sec);
 }
 
 .Tweet-Component-Imagecon :nth-child(1) img {
@@ -49,6 +57,7 @@
 .Tweet-Component-Header {
     display: flex;
     gap: 1rem;
+   flex-grow: 1;
     cursor: pointer;
     flex-direction: column;
 }
@@ -78,7 +87,6 @@
     justify-content: space-between;
     align-items: center;
 }
-
 .Tweet-Component-Header-Divider-Two> :nth-child(1) :nth-child(1) {
     max-width: 65%;
     white-space: nowrap;
@@ -134,6 +142,10 @@
     padding: 1rem;
     border: 1px solid var(--border);
     border-radius: 15px;
+    transition: 0.2s;
+}
+.Tweet-Component-For-Replies:hover{
+    background-color: var(--tweethover);
 }
 
 .Tweet-Component-For-Replies-Top {
@@ -147,12 +159,13 @@
     width: 35px;
     height: 35px;
     overflow: hidden;
+    background-color: var(--sec);
+    border-radius: 50%;
 }
 
 .Tweet-Component-For-Replies-Top> :nth-child(1) img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
 }
 
 .Tweet-Component-For-Replies-Top> :nth-child(2) {
@@ -173,7 +186,6 @@
     flex-direction: column;
     gap: 0.5rem;
 }
-
 .Tweet-Component-For-Replies-Bottom :nth-child(2) {
     width: 100%;
     max-height: 80vh;
@@ -250,18 +262,26 @@ background-color: var(--maindim);
     background-color: var(--maindim);
     color: var(--sec);
 }
-.Tweet-Component-Bottom-Options> :nth-child(1):hover {
-    color: var(--blue) !important;
-    filter: drop-shadow(0rem 0rem 0.5rem rgba(29, 155, 240, 1));
-}
 .Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(1){
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
+.Tweet-Component-Bottom-Options> :nth-child(1):hover {
+    color: var(--blue) !important;
+    filter: drop-shadow(0rem 0rem 0.5rem rgba(29, 155, 240, 1));
+}
 .Tweet-Component-Bottom-Options> :nth-child(2)>:nth-child(1):hover {
     color: #6af06a;
     filter: drop-shadow(0rem 0rem 0.5rem rgba(106, 240, 106, 1));
+}
+.TRC{
+    color: #6af06a !important;
+    filter: drop-shadow(0rem 0rem 0.5rem rgba(106, 240, 106, 1));
+}
+.TRL{
+    color: #ff3a7c !important;
+    filter: drop-shadow(0rem 0rem 0.5rem rgba(255, 58, 124, 1));
 }
 
 .Tweet-Component-Bottom-Options> :nth-child(3):hover {

@@ -7,7 +7,7 @@ function Ficontainer() {
   const { infotype } = useParams();
   return (
     <div className='Ficontainer-Component'>
-    <Topnav toggle={"name"} info = {infotype} />
+    <Topnav toggle={"name"} name = {infotype} />
     <div className='FIC-Users-Container'>
         <Users/>
     </div>

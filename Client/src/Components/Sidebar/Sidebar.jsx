@@ -12,7 +12,6 @@ import { faFeatherPointed, faArrowRightFromBracket, faCode } from '@fortawesome/
 import { appContext } from '../../App';
 function Sidebar() {
   const { AppHelpers, SetAppHelpers, currentUser } = useContext(appContext);
-  const [userDetails, setUserDetails] = useState();
   const navigate = useNavigate();
   //handle sidebar toggle 
   const handleSidebarToggle = () => {
@@ -26,7 +25,8 @@ function Sidebar() {
     SetAppHelpers(prevState => ({
       ...prevState,
       toggleforaddpost: !prevState.toggleforaddpost,
-      toggleforsidebar: !prevState.toggleforsidebar
+      toggleforsidebar: !prevState.toggleforsidebar,
+      tweetvalue: "none"
     }));
   }
   //logout
@@ -36,25 +36,6 @@ function Sidebar() {
     toast.success("Sign Out Successful");
     navigate('/signin')
   }
-  //getting user 
-  useEffect(() => {
-    const fetchData = async () => {
-      if(!currentUser){
-        return
-      }
-      try {
-        const token = sessionStorage.getItem('token');
-        const headers = {
-          'Authorization': `Bearer ${token}`,
-        };
-        const response = await axios.get(`${BASE_URL}/api/user/getuser/${currentUser._id}`, { headers });
-        setUserDetails(response.data.user);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [currentUser]);
   return (
     <div className={AppHelpers.toggleforsidebar ? 'Sidebar-Component Sidebar-Component-Transition' : "Sidebar-Component"}>
       <div className='Sidebar-Component-Upper'>
@@ -63,27 +44,27 @@ function Sidebar() {
           <div className='Sidebar-Component-Profiledetails-Upper'>
             <Link to={`/profile/${currentUser?._id}`}className='Sidebar-Component-Profiledetails-Upper-Imagecon'>
               {
-                userDetails?.profileimage === '' ? <img
+                currentUser?.profileimage === '' ? <img
                   src="https://vectorified.com/images/guest-icon-3.png"
                   alt="image"
                 /> : <img
-                  src={userDetails?.profileimage}
+                  src={currentUser?.profileimage}
                   alt="image"
                 />
               }
             </Link>
             <Link to={`/profile/${currentUser?._id}`}className='Sidebar-Component-Profiledetails-Namecon'>
-              <p>{userDetails?.username}</p>
-              <p>@{userDetails?.name}</p>
+              <p>{currentUser?.username}</p>
+              <p>@{currentUser?.name}</p>
             </Link>
           </div>
           <div className='Sidebar-Component-Profiledetails-Lower'>
             <Link to="/info/Following">
-              <p>{userDetails?.following.length}</p>
+              <p>{currentUser?.following.length}</p>
               <p>Following</p>
             </Link>
             <Link to="/info/Followers">
-              <p>{userDetails?.followers.length}</p>
+              <p>{currentUser?.followers.length}</p>
               <p>Followers</p>
             </Link>
           </div>

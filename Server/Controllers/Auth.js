@@ -104,7 +104,7 @@ const signinUser =async(req,res)=>{
             userId: user._id,
           };
           const token = jwt.sign(payload, process.env.JWT_SECRET);
-          const { password:userPassword, ...userObject } = user.toObject();
+          const { password:userPassword,tweets,reposts,likes,deleted, ...userObject } = user.toObject();
           const userDetails = {
             token,
             user:userObject,

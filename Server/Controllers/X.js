@@ -154,7 +154,7 @@ const followToggle = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Toggle Success", userFollowed, userFollowing });
+      .json({ message: "Follow Toggle Success"});
   } catch (error) {
     console.log(error);
     if (error instanceof z.ZodError) {
@@ -306,6 +306,7 @@ const repostTweet = async (req, res) => {
 // post comment
 const postComment = async (req, res) => {
   try {
+    console.log(req.body)
     const { userId } = req.user;
     const tweetId = req.params.id;
     const { tweetText } = req.body;
@@ -337,7 +338,6 @@ const postComment = async (req, res) => {
     tweet.comments.push(comment._id);
     await tweet.save();
     await comment.save();
-
     res.status(201).json({ message: "Comment posted successfully" });
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -395,7 +395,9 @@ const deleteTweet = async (req, res) => {
     tweet.deleted = true;
     await tweet.save();
     res.status(200).json({ message: "Tweet deleted successfully" });
-  } catch (error) {}
+  } catch (error) {
+    
+  }
 };
 
 //delete account
@@ -433,74 +435,7 @@ const getUser = async (req, res) => {
   }
 };
 
-//get user likes/comments/posts
-// const getTweet = async (req, res) => {
-//   try {
-//     const userId = req.params.id;
-//     const type = req.params.type;
-
-//     // Check if user exists and is not deleted
-//     const user = await userModel.findById(userId);
-//     if (!user || user.deleted) {
-//       return res.status(400).json({ message: "User not found" });
-//     }
-
-//     let tweets = [];
-
-//     // Fetch tweets based on the type
-//     if (type === 'posts') {
-//       // Fetch original tweets, quoted tweets, and reposted tweets
-//       const userTweets = await tweetModel.find({
-//         $and: [
-//           { user: userId },
-//           { $or: [{ deleted: { $exists: false } }, { deleted: false }] }
-//         ]
-//       }).populate('quotes').populate('quotefor');
-
-//       const repostedTweets = await tweetModel.find({
-//         $and: [
-//           { reposts: userId },
-//           { $or: [{ deleted: { $exists: false } }, { deleted: false }] }
-//         ]
-//       }).populate('quotes').populate('quotefor');
-
-//       tweets = userTweets.concat(repostedTweets);
-//     } else if (type === 'liked') {
-//       // Fetch liked tweets
-//       const likedTweetIds = user.likes.filter(tweetId => !tweetId.deleted);
-//       tweets = await tweetModel.find({
-//         $and: [
-//           { _id: { $in: likedTweetIds } },
-//           { $or: [{ deleted: { $exists: false } }, { deleted: false }] }
-//         ]
-//       }).populate('quotes').populate('quotefor');
-//     } else if (type === 'commented') {
-//       // Fetch commented tweets
-//       const commentedTweetIds = await commentModel.find({
-//         $and: [
-//           { user: userId },
-//           { $or: [{ deleted: { $exists: false } }, { deleted: false }] }
-//         ]
-//       }).distinct('tweet');
-
-//       tweets = await tweetModel.find({
-//         $and: [
-//           { _id: { $in: commentedTweetIds } },
-//           { $or: [{ deleted: { $exists: false } }, { deleted: false }] }
-//         ]
-//       }).populate('quotes').populate('quotefor').populate('comments');
-//     } else {
-//       return res.status(400).json({ message: "Invalid type" });
-//     }
-
-//     // Send the fetched tweets
-//     res.json({ tweets });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// };
-
+//get single user likes/comments/posts
 const getTweet = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -510,16 +445,20 @@ const getTweet = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
     if (type === "posts") {
-      const tweets = await tweetModel
+      let tweets = await tweetModel
         .find({
           user: userId,
           deleted: { $ne: true },
-        })
+        }).sort({ createdAt: -1 })
         .populate({
           path: "user",
           match: { deleted: { $ne: true } },
         })
-        .populate("quotefor");
+        .populate({
+          path: "quotefor",
+          populate: { path: "user"} 
+        });
+        tweets = tweets.filter(tweet => !tweet.quotefor[0]?.deleted);
       return res.status(200).json({ tweets });
     }
     if (type === "reposts") {
@@ -534,11 +473,16 @@ const getTweet = async (req, res) => {
             path: "user",
             match: { deleted: { $ne: true } },
           })
-          .populate("quotefor");
-        if (repostedTweet) {
-          tweets.push(repostedTweet);
-        }
+          .populate({
+            path: "quotefor",
+            populate: { path: "user"} 
+          });
+          if (repostedTweet && !repostedTweet.quotefor[0]?.deleted) {
+            tweets.push(repostedTweet);
+          }
       }
+      tweets = tweets.filter(tweet => tweet.user)
+     tweets.reverse();
       return res.status(200).json({ tweets });
     } else if (type === "likes") {
       let tweets = [];
@@ -547,12 +491,17 @@ const getTweet = async (req, res) => {
         .find({
           _id: { $in: likedTweetIds },
           deleted: { $ne: true },
-        })
+        }).sort({ createdAt: -1 })
         .populate({
           path: "user",
           match: { deleted: { $ne: true } },
         })
-        .populate("quotefor");
+        .populate({
+          path: "quotefor",
+          populate: { path: "user"} 
+        });
+        tweets = tweets.filter(tweet => !tweet.quotefor[0]?.deleted);
+        tweets = tweets.filter((tweet) => tweet.quotefor.user !== null);
       tweets = tweets.filter((tweet) => tweet.user !== null);
       return res.status(200).json({ tweets });
     } else if (type === "replies") {
@@ -572,8 +521,25 @@ const getTweet = async (req, res) => {
           path: "user",
           match: { deleted: { $ne: true } },
         })
-        .populate("comments")
-        .populate("quotefor");
+        .populate({
+          path: "comments",
+          populate: { path: "user"} 
+        })
+        .populate({
+          path: "quotefor",
+          populate: { path: "user"} 
+        });
+
+        tweets.sort((a, b) => {
+          const mostRecentCommentA = a.comments.reduce((latest, comment) => 
+             new Date(comment.createdAt) > new Date(latest.createdAt) ? comment : latest, a.comments[0]);
+          const mostRecentCommentB = b.comments.reduce((latest, comment) => 
+             new Date(comment.createdAt) > new Date(latest.createdAt) ? comment : latest, b.comments[0]);
+          return new Date(mostRecentCommentB.createdAt) - new Date(mostRecentCommentA.createdAt);
+         });
+
+        tweets = tweets.filter(tweet => !tweet.quotefor[0]?.deleted);
+        tweets = tweets.filter((tweet) => tweet.comments.user !==null);
       tweets = tweets.filter((tweet) => tweet.user !== null);
       return res.status(200).json({ tweets });
     } else {
@@ -584,6 +550,56 @@ const getTweet = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+//single tweet
+const singleTweet = async (req, res) => {
+  const tweetId  = req.params.id;
+  try {
+    const tweet = await tweetModel
+      .findById(tweetId)
+      .populate('user')
+      .populate({
+        path: 'quotefor',
+        populate: {
+          path: 'user'
+        }
+      })
+      .populate({
+        path: 'comments',
+        populate: {
+          path: 'user'
+        }
+      })
+      .exec();
+
+    if (!tweet || tweet.deleted === true) {
+      return res.status(404).json({ message: "Tweet not found or deleted" });
+    }
+    return res.status(200).json(tweet);
+  } catch (error) {
+    console.error('Error fetching single tweet:', error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+//user follow following
+const followInfo = async(req, res) => {
+  try {
+    const { userId } = req.user;
+    const user = await userModel.findById(userId)
+      .populate('followers', 'name username profileimage')
+      .populate('following', 'name username profileimage');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const followers = user.followers;
+    const following = user.following;
+    return res.json({ followers, following });
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
 
 //module export
 module.exports = {
@@ -598,4 +614,6 @@ module.exports = {
   deleteAccount,
   getUser,
   getTweet,
+  singleTweet,
+  followInfo
 };
