@@ -1,6 +1,6 @@
 import Sidebar from '../Sidebar/Sidebar'
 import Header from '../Header/Header';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react';
 import Tweet from '../Tweet/Tweet.jsx';
 import axios from "axios"
@@ -17,7 +17,8 @@ import { tweetValidationSchema } from '../Helpers/Yup.js';
 import { BASE_URL } from '../Helpers/Base_Url.js';
 function Home() {
     const inputRef = useRef(null);
-    const { SetAppHelpers,currentUser} = useContext(appContext);
+    const { SetAppHelpers, currentUser,AppHelpers } = useContext(appContext);
+    const [tweets, setTweets] = useState();
     const [userDetails, setUserDetails] = useState({
         tweetText: "",
     });
@@ -49,7 +50,6 @@ function Home() {
         });
     };
 
-
     //Handle image removal
     const handleImageRemove = () => {
         SetImageState({
@@ -57,15 +57,16 @@ function Home() {
             file: null
         })
     }
+    //handle loading
+    const toggleLoading = () => {
+        SetAppHelpers(prevState => ({
+            ...prevState,
+            toggleforloading: !prevState.toggleforloading
+        }))
+    };
     //handle submit
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const toggleLoading = () => {
-            SetAppHelpers(prevState => ({
-                ...prevState,
-                toggleforloading: !prevState.toggleforloading
-            }))
-        };
         try {
             await tweetValidationSchema.validate(userDetails, { abortEarly: false });
             try {
@@ -77,8 +78,8 @@ function Home() {
                 const headers = {
                     'Authorization': `Bearer ${token}`,
                 };
-                const response = await axios.post(`${BASE_URL}/api/user/posttweet/none` , formData , {headers});
-                if(response.status === 201){
+                const response = await axios.post(`${BASE_URL}/api/user/posttweet/none`, formData, { headers });
+                if (response.status === 201) {
                     toast.success(`${response.data.message}`);
                     setUserDetails({
                         tweetText: ""
@@ -88,6 +89,10 @@ function Home() {
                         file: null
                     });
                     toggleLoading();
+                    SetAppHelpers(prevState => ({
+                        ...prevState,
+                         toggleforalltweets: !prevState.toggleforalltweets
+                      }));
                 }
             } catch (error) {
                 if (error.response && error.response.status === 400) {
@@ -102,14 +107,31 @@ function Home() {
         catch (errors) {
             const validationErrors = {};
             errors.inner.forEach((error) => {
-              validationErrors[error.path] = error.message;
+                validationErrors[error.path] = error.message;
             });
             setUserDetails(prevState => ({
-              ...prevState,
-              errors: validationErrors
+                ...prevState,
+                errors: validationErrors
             }));
         }
     }
+
+    //fetch all tweets 
+    const fetchTweets = async () => {
+        try {
+            toggleLoading();
+            const response = await axios.get(`${BASE_URL}/api/user/alltweets`);
+            if (response.status === 200) {
+                toggleLoading();
+            }
+            setTweets(response.data);
+        } catch (error) {
+            toggleLoading();
+        }
+    }
+    useEffect(() => {
+        fetchTweets();
+    }, [AppHelpers.toggleforalltweets])
     return (
         <div className='Home-Component'>
             <Sidebar />
@@ -118,21 +140,21 @@ function Home() {
                 <form className='Home-Component-WriteTweet' onSubmit={handleSubmit}>
                     <div className='Home-Component-WriteTweet-Left'>
                         <div>
-                        {
-                currentUser?.profileimage === '' ? <img
-                  src="https://vectorified.com/images/guest-icon-3.png"
-                  alt="image"
-                /> : <img
-                  src={currentUser?.profileimage}
-                  alt="image"
-                />
-              }
+                            {
+                                currentUser?.profileimage === '' ? <img
+                                    src="https://vectorified.com/images/guest-icon-3.png"
+                                    alt="image"
+                                /> : <img
+                                    src={currentUser?.profileimage}
+                                    alt="image"
+                                />
+                            }
                         </div>
                     </div>
                     <div className='Home-Component-WriteTweet-Right'>
                         <TextareaAutosize placeholder='Type Something!' spellCheck="false" value={userDetails.tweetText}
                             onChange={handleTextChange} />
-                               {userDetails.errors?.tweetText && <p className="error" style={{ color: 'var(--error)', fontSize: '0.7rem' }}>{userDetails.errors.tweetText}</p>}
+                        {userDetails.errors?.tweetText && <p className="error" style={{ color: 'var(--error)', fontSize: '0.7rem' }}>{userDetails.errors.tweetText}</p>}
                         {ImageState.preview !== "" && <div className='Home-Component-WriteTweet-Right-Imagecon'>
                             <FontAwesomeIcon icon={faX} style={{ color: "#e7e9ea", }} onClick={handleImageRemove} />
                             {ImageState.preview && <img src={ImageState.preview} alt="Selected" />}
@@ -146,7 +168,16 @@ function Home() {
                     </div>
                     <input type="file" accept="image/*" ref={inputRef} style={{ display: 'none' }} onChange={handleFileChange} />
                 </form>
-                {/* <Tweet /> */}
+                {
+                    tweets?.length > 0 ? (
+                        tweets.map((tweet, index) => (
+                            <Tweet key={index} tweet= {tweet} type= {"posts"} />
+                        ))
+                    ) : (
+                        <div className='NDA'> Nothing to see here! </div>
+                    )
+                }
+
             </div>
         </div>
     )

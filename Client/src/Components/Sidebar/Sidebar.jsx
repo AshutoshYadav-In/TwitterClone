@@ -1,5 +1,5 @@
 import { React, useContext, useEffect, useState } from 'react';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate,useParams} from 'react-router-dom';
 import './Sidebar.css';
 import axios from 'axios';
 import { BASE_URL } from '../Helpers/Base_Url';
@@ -11,7 +11,9 @@ import { faX, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faFeatherPointed, faArrowRightFromBracket, faCode } from '@fortawesome/free-solid-svg-icons';
 import { appContext } from '../../App';
 function Sidebar() {
+  const{id} = useParams();
   const { AppHelpers, SetAppHelpers, currentUser } = useContext(appContext);
+  const[user,setUser]= useState();
   const navigate = useNavigate();
   //handle sidebar toggle 
   const handleSidebarToggle = () => {
@@ -36,6 +38,23 @@ function Sidebar() {
     toast.success("Sign Out Successful");
     navigate('/signin')
   }
+  //get user
+  useEffect(()=>{
+    const getUser= async()=>{
+      if(!currentUser){
+        return
+      }
+      try{
+       const response = await axios.get(`${BASE_URL}/api/user/user/${currentUser?._id}`);
+       if(response.status ===200){
+        setUser(response.data)
+       }
+      }catch(error){
+        toast.error(`${error.response.data.message}`);
+      }
+    }
+  getUser();
+    },[id,AppHelpers.toggleforfollowreload,currentUser])
   return (
     <div className={AppHelpers.toggleforsidebar ? 'Sidebar-Component Sidebar-Component-Transition' : "Sidebar-Component"}>
       <div className='Sidebar-Component-Upper'>
@@ -59,12 +78,12 @@ function Sidebar() {
             </Link>
           </div>
           <div className='Sidebar-Component-Profiledetails-Lower'>
-            <Link to="/info/Following">
-              <p>{currentUser?.following.length}</p>
+            <Link to={`/${currentUser?._id}/Following`}>
+              <p>{user?.following?.length}</p>
               <p>Following</p>
             </Link>
-            <Link to="/info/Followers">
-              <p>{currentUser?.followers.length}</p>
+            <Link to={`/${currentUser?._id}/Followers`}>
+              <p>{user?.followers?.length}</p>
               <p>Followers</p>
             </Link>
           </div>

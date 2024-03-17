@@ -28,11 +28,14 @@ function App() {
     toggleforloading:false,
     toggleforeload:true,
     togglefordeletion:false,
+    toggleforfollowreload:false,
+    toggleforalltweets:false,
     tweetdeletedetails:{
     id: "",
     type:""
     },
-    tweetvalue:"none", 
+    tweetvalue:"none",
+
   });
   return (
     <appContext.Provider value={{ AppHelpers, SetAppHelpers,currentUser }}>
@@ -66,7 +69,7 @@ function App() {
       <Route path="/profile/:id" element={<ProtectedRoute element={Profile} />} />
       <Route path="/tweet/:id" element={<ProtectedRoute element={Singletweet} />} />
       <Route path="/search" element={<ProtectedRoute element={Searchcomponent} />} />
-      <Route path="/info/:infotype" element={<ProtectedRoute element={Followerinfo} />} />
+      <Route path="/:id/:infotype" element={<ProtectedRoute element={Followerinfo} />} />
       </Routes>
       </div>
     </div>

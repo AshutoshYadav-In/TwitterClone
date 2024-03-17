@@ -1,4 +1,4 @@
-import React, { useState,useContext, useEffect,useCallback } from "react";
+import  {React, useState,useContext, useEffect,useCallback } from "react";
 import "./Profiledetails.css";
 import { Link,useParams } from "react-router-dom";
 import axios from "axios"
@@ -49,7 +49,7 @@ const fetchData = async () => {
     const response = await axios.get(`${BASE_URL}/api/user/getuser/${id}`, {headers});
     setUserDetails(response.data.user);
   } catch (error) {
-    console.log(error);
+    
   }
 };
 useEffect(() => {
@@ -64,7 +64,7 @@ const getFollowInfo = async()=>{
     const headers = {
         'Authorization': `Bearer ${token}`,
     };
-    const response = await axios.get(`${BASE_URL}/api/user/followinfo` , {headers});
+    const response = await axios.get(`${BASE_URL}/api/user/followinfo/${id}` , {headers});
     if(response.status===200){
      handleLoading();
     }
@@ -77,6 +77,14 @@ const getFollowInfo = async()=>{
 useEffect(()=>{
 getFollowInfo();
 },[])
+
+//handle follow reload
+const handleFollowReload = () => {
+  SetAppHelpers(prevState => ({
+      ...prevState,
+      toggleforfollowreload: !prevState.toggleforfollowreload
+  }));
+}
 
 //follow toggle
 const followToggle = async()=>{
@@ -91,6 +99,7 @@ const followToggle = async()=>{
      handleLoading();
      getFollowInfo();
      fetchData();
+     handleFollowReload();
     }
   }catch(error){ 
 
@@ -122,7 +131,7 @@ const followToggle = async()=>{
         <div className="PC-TOP-Container">
           <div className="PC-Editprofile">
             {
-              currentUser?._id === id ?<button onClick={handleToggleEditProfile}>Edit Profile</button> : <button onClick={followToggle}>{followInfo?.following?.some(user => user._id === id)? "Unfollow" : "Follow"}</button>
+              currentUser?._id === id ?<button onClick={handleToggleEditProfile}>Edit Profile</button> : <button onClick={followToggle}>{followInfo?.followers?.some(user => user._id === currentUser._id)? "Unfollow" : "Follow"}</button>
             }
           </div>
           <div className="PC-TOP-Namecon">
@@ -135,11 +144,11 @@ const followToggle = async()=>{
          </div>
          }
           <div className="PC-TOP-Followcon">
-            <Link to= '/info/Following'>
+            <Link to= {`/${id}/Following`}>
               <p>{userDetails?.following.length}</p>
               <p>Following</p>
             </Link>
-            <Link to="/info/Followers">
+            <Link to= {`/${id}/Followers`}>
               <p>{userDetails?.followers.length}</p>
               <p>Followers</p>
             </Link>

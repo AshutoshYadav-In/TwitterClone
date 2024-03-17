@@ -95,7 +95,6 @@ const updateUser = async (req, res) => {
       .status(200)
       .json({ message: "Profile updated successfully", user: rest });
   } catch (error) {
-    console.log(error);
     if (error instanceof z.ZodError) {
       // Handle validation errors
       return res.status(400).json({ message: error.errors[0].message });
@@ -156,7 +155,6 @@ const followToggle = async (req, res) => {
       .status(200)
       .json({ message: "Follow Toggle Success"});
   } catch (error) {
-    console.log(error);
     if (error instanceof z.ZodError) {
       return res.status(400).json({ message: error.errors[0].message });
     }
@@ -255,7 +253,6 @@ const likeTweet = async (req, res) => {
       return res.status(200).json({ message: "Tweet liked" });
     }
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -306,7 +303,6 @@ const repostTweet = async (req, res) => {
 // post comment
 const postComment = async (req, res) => {
   try {
-    console.log(req.body)
     const { userId } = req.user;
     const tweetId = req.params.id;
     const { tweetText } = req.body;
@@ -375,7 +371,6 @@ const deleteComment = async (req, res) => {
     await commentModel.findByIdAndDelete(commentId);
     return res.status(200).json({ message: "Comment deleted successfully" });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -430,7 +425,6 @@ const getUser = async (req, res) => {
       user.toObject();
     return res.status(200).json({ user: rest });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -452,11 +446,12 @@ const getTweet = async (req, res) => {
         }).sort({ createdAt: -1 })
         .populate({
           path: "user",
+          select: '_id username name profileimage',
           match: { deleted: { $ne: true } },
         })
         .populate({
           path: "quotefor",
-          populate: { path: "user"} 
+          populate: { path: "user", select: '_id username name profileimage',} 
         });
         tweets = tweets.filter(tweet => !tweet.quotefor[0]?.deleted);
       return res.status(200).json({ tweets });
@@ -471,11 +466,12 @@ const getTweet = async (req, res) => {
           })
           .populate({
             path: "user",
+            select: '_id username name profileimage',
             match: { deleted: { $ne: true } },
           })
           .populate({
             path: "quotefor",
-            populate: { path: "user"} 
+            populate: { path: "user" ,select: '_id username name profileimage',} 
           });
           if (repostedTweet && !repostedTweet.quotefor[0]?.deleted) {
             tweets.push(repostedTweet);
@@ -494,11 +490,12 @@ const getTweet = async (req, res) => {
         }).sort({ createdAt: -1 })
         .populate({
           path: "user",
+          select: '_id username name profileimage',
           match: { deleted: { $ne: true } },
         })
         .populate({
           path: "quotefor",
-          populate: { path: "user"} 
+          populate: { path: "user" , select: '_id username name profileimage',} 
         });
         tweets = tweets.filter(tweet => !tweet.quotefor[0]?.deleted);
         tweets = tweets.filter((tweet) => tweet.quotefor.user !== null);
@@ -519,15 +516,16 @@ const getTweet = async (req, res) => {
         })
         .populate({
           path: "user",
+          select: '_id username name profileimage',
           match: { deleted: { $ne: true } },
         })
         .populate({
           path: "comments",
-          populate: { path: "user"} 
+          populate: { path: "user", select: '_id username name profileimage',} 
         })
         .populate({
           path: "quotefor",
-          populate: { path: "user"} 
+          populate: { path: "user", select: '_id username name profileimage',} 
         });
 
         tweets.sort((a, b) => {
@@ -546,7 +544,6 @@ const getTweet = async (req, res) => {
       return res.status(400).json({ message: "Invalid type" });
     }
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -577,7 +574,6 @@ const singleTweet = async (req, res) => {
     }
     return res.status(200).json(tweet);
   } catch (error) {
-    console.error('Error fetching single tweet:', error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -585,7 +581,7 @@ const singleTweet = async (req, res) => {
 //user follow following
 const followInfo = async(req, res) => {
   try {
-    const { userId } = req.user;
+const userId = req.params.id;
     const user = await userModel.findById(userId)
       .populate('followers', 'name username profileimage')
       .populate('following', 'name username profileimage');
@@ -600,6 +596,41 @@ const followInfo = async(req, res) => {
   }
 }
 
+//get other user
+const otherUser = async(req,res)=>{
+try{
+const {id} = req.params;
+const user = await userModel.findById(id);
+if(!user){
+  return res.status(200).json({message:"User not found"});
+}
+const{password,coverimage,email,bio,deleted,reposts,likes,tweets, ...rest} = user.toObject();
+return res.status(200).json(rest)
+
+}catch(error){
+  return res.status(500).json({ message: 'Internal server error' });
+}
+}
+
+//get all tweets
+const getAllTweets = async (req, res) => {
+  try {
+      const tweets = await tweetModel.find({ deleted: false }).populate({
+          path: 'user',
+          select: '_id username name profileimage',
+      }).populate({
+          path: 'quotefor', 
+          populate: {
+              path: 'user',
+              select: '_id username profileimage name',
+          },
+      }).sort({ createdAt: -1 });
+      const filteredTweets = tweets.filter(tweet => tweet.quotefor[0]?.deleted !== true);
+    return res.json(filteredTweets);
+  } catch (error) {
+     return res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 //module export
 module.exports = {
@@ -615,5 +646,7 @@ module.exports = {
   getUser,
   getTweet,
   singleTweet,
-  followInfo
+  followInfo,
+  otherUser,
+  getAllTweets
 };

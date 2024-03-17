@@ -92,6 +92,10 @@ const handleSubmit = async (e) => {
                 });
                 toggleLoading();
                 handleAddpostToggle()
+                SetAppHelpers(prevState => ({
+                    ...prevState,
+                     toggleforalltweets: !prevState.toggleforalltweets
+                  }));
             }
             SetAppHelpers(prevState => ({
                 ...prevState,

@@ -66,7 +66,7 @@ function Singletweetcontainer() {
         if (inputElement) {
           inputElement.focus();
         }
-      }, []);
+      }, [tweet]);
     //handle submit
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -158,8 +158,9 @@ function Singletweetcontainer() {
        tweet?.length > 0 && tweet.map((tweet,index)=>(
         <Tweet  key={index} tweet={tweet} type ={"posts"}  />
        ))
+       
       }
-        <form className='Home-Component-WriteTweet' onSubmit={handleSubmit}>
+        {tweet?.length>0 ?   (<form className='Home-Component-WriteTweet' onSubmit={handleSubmit}>
                     <div className='Home-Component-WriteTweet-Left'>
                         <div>
                         {
@@ -189,9 +190,9 @@ function Singletweetcontainer() {
                         </div>
                     </div>
                     <input type="file" accept="image/*" ref={inputRef} style={{ display: 'none' }} onChange={handleFileChange} />
-                </form>
+                </form>) : (<div className='NDA'>Tweet not available </div>)}
                 {
-       tweet?.length > 0 && tweet.map((tweet,index)=>(
+         tweet?.length> 0 && tweet?.map((tweet,index)=>(
         <Tweet key={index} tweet={tweet} type ={"singletweet"}  />
        ))
       }

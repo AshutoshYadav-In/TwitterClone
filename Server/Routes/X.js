@@ -10,12 +10,14 @@ router.post('/posttweet/:id',verifyToken,upload.single('image'),X.postTweet);
 router.get('/Liketweet/:id',verifyToken,X.likeTweet);
 router.get('/reposttweet/:id',verifyToken,X.repostTweet)
 router.post('/comment/:id',verifyToken,upload.single('image'),X.postComment);
-router.get('/follow/:id',verifyToken,upload.single("image"),X.followToggle);
+router.get('/follow/:id',verifyToken,X.followToggle);
 router.delete('/deletecomment/:id',verifyToken,X.deleteComment);
 router.delete('/deletetweet/:id',verifyToken,X.deleteTweet);
 router.delete('/deleteaccount',verifyToken,X.deleteAccount);
 router.get('/getuser/:id',verifyToken,X.getUser);
 router.get('/gettweet/:id/:type',verifyToken,X.getTweet);
 router.get('/tweet/:id' , X.singleTweet);
-router.get('/followinfo' ,verifyToken, X.followInfo)
+router.get('/followinfo/:id' ,verifyToken, X.followInfo);
+router.get('/user/:id' , X.otherUser);
+router.get('/alltweets' , X.getAllTweets)
 module.exports = router;

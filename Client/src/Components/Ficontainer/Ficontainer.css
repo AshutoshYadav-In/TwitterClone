@@ -15,6 +15,10 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+.NDA{
+    margin: 0.5rem 0rem 0rem 0.5rem;
+    color: var(--secdim);
+}
 /* media queries */
 @media (min-width: 1200px) and (max-width: 1400px) {
     .Ficontainer-Component{
@@ -26,11 +30,17 @@
     .Ficontainer-Component{
         width: 67%;
     }
+    .NDA{
+        font-size: 0.95rem;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
     .Ficontainer-Component{
         width: 60%;
+    }
+    .NDA{
+        font-size: 0.92rem;
     }
 }
 
@@ -38,16 +48,25 @@
     .Ficontainer-Component{
         width: 100%;
     }
+    .NDA{
+        font-size: 0.9rem;
+    }
 }
 
 @media (min-width: 420px) and (max-width: 576px) {
     .Ficontainer-Component{
         width: 100%;
     }
+    .NDA{
+        font-size: 0.87rem;
+    }
 }
 
 @media (min-width: 310px) and (max-width: 420px) {
     .Ficontainer-Component{
         width: 100%;
+    }
+    .NDA{
+        font-size: 0.85rem;
     }
 }

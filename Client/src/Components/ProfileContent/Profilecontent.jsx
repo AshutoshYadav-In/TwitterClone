@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 function Profilecontent() {
   const { AppHelpers, SetAppHelpers, currentUser } = useContext(appContext);
   const[tweetType,SetTweetType] =useState();
+  const[user,setUser]= useState();
   const[tweetData,SetTweetData] = useState();
   const {id} = useParams();
   useEffect(()=>{
@@ -41,14 +42,29 @@ function Profilecontent() {
     }
     getData();
   },[tweetType,AppHelpers.toggleforreload,id]);
+   
+  //get user
+  useEffect(()=>{
+  const getUser= async()=>{
+    try{
+     const response = await axios.get(`${BASE_URL}/api/user/user/${id}`);
+     if(response.status ===200){
+      setUser(response.data)
+     }
+    }catch(error){
+      toast.error(`${error.response.data.message}`);
+    }
+  }
+getUser();
+  },[id])
   return (
     <div className='Profilecontent-Component'>
-   <Topnav toggle = {"name"} name= {currentUser?.name}/>
+   <Topnav toggle = {"name"} name= {user?.name}/>
    <Profiledetails SetTweetType= {SetTweetType}/>
-  { tweetData?.tweets.length >0 &&
+  { tweetData?.tweets.length >0 ?
    tweetData?.tweets.map((tweet,index) => (
         <Tweet key={index} tweet={tweet} type={tweetType} />
-      ))}
+      )) : <div className='NDA'>No data available</div>}
     </div>
   )
 }

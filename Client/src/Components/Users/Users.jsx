@@ -1,18 +1,86 @@
-import React from 'react'
+import { React, useContext, useEffect, useState } from 'react'
 import './Users.css'
-function Users() {
+import { Link, useParams } from "react-router-dom";
+import axios from "axios"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { appContext } from '../../App';
+import { BASE_URL } from '../Helpers/Base_Url';
+function Users({ info, valueforrefresh, setValueForRefresh }) {
+    const { id } = useParams();
+    const[followInfo,setFollowInfo] =useState();
+    const { SetAppHelpers, currentUser } = useContext(appContext);
+
+    //handle loading toggle 
+    const handleLoading = () => {
+        SetAppHelpers(prevState => ({
+            ...prevState,
+            toggleforloading: !prevState.toggleforloading
+        }));
+    }
+
+    //handle reload for fololow
+    const handleFollowReload = () => {
+        SetAppHelpers(prevState => ({
+            ...prevState,
+            toggleforfollowreload: !prevState.toggleforfollowreload
+        }));
+    }
+    //follow toggle
+    const followToggle = async (infoid) => {
+        try {
+            const token = sessionStorage.getItem('token');
+            const headers = {
+                'Authorization': `Bearer ${token}`,
+            };
+            const response = await axios.get(`${BASE_URL}/api/user/follow/${infoid}`, { headers });
+            if (response.status === 200) {
+                setValueForRefresh(!valueforrefresh);
+                handleFollowReload();
+                getFollowInfo()
+            }
+        } catch (error) {
+        }
+    }
+
+    //fetch follow function 
+const getFollowInfo = async()=>{
+    try{
+      const token = sessionStorage.getItem('token');
+      const headers = {
+          'Authorization': `Bearer ${token}`,
+      };
+      const response = await axios.get(`${BASE_URL}/api/user/followinfo/${id}` , {headers});
+      if(response.status===200){
+      }
+      setFollowInfo(response.data)
+    }catch(error){
+      toast.error(`${error.response.data.message}`)
+    }
+    }
+  useEffect(()=>{
+  getFollowInfo();
+  },[])
     return (
         <div className='Users-Component'>
-            <div>
+            <Link to= {`/profile/${info?._id}`} >
                 <div className='UC-Imagecon'>
-                    <img src="https://res.cloudinary.com/deeji7ttf/image/upload/v1706810102/Userimages/c0l7i9ovjbjbr2ueeunv.png" alt="" />
+                    {
+                        info?.profileimage === '' ? <img
+                            src="https://vectorified.com/images/guest-icon-3.png"
+                            alt="image"
+                        /> : <img
+                            src={info?.profileimage}
+                            alt="image"
+                        />
+                    }
                 </div>
                 <div>
-                    <p>Internshala Trainings</p>
-                    <p>@Internshala</p>
+                    <p>{info?.name}</p>
+                    <p>{info?.username}</p>
                 </div>
-            </div>
-            <button>Follow</button>
+            </Link>
+            <button onClick={() => followToggle(info?._id)}>{followInfo?.following?.some(user=> user._id === info?._id)? "Unfollow": "Follow"}</button>
         </div>
     )
 }

@@ -38,7 +38,8 @@ function Confirmdelete() {
    toast.success(`${response.data.message}`);
    SetAppHelpers(prevState => ({
     ...prevState,
-    toggleforreload: !prevState.toggleforreload
+    toggleforreload: !prevState.toggleforreload,
+    toggleforalltweets: !prevState.toggleforalltweets
   }));
    handleLoading();
    handleCancel();

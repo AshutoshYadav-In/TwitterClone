@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faRetweet, faPen, faX } from '@fortawesome/free-solid-svg-icons';
 import './Tweet.css'
-function Tweet({ tweet, type }) {
+function Tweet({ tweet, type,setLat,lat }) {
   const { id } = useParams();
   const { currentUser, AppHelpers, SetAppHelpers } = useContext(appContext);
   const [retweetToggle, setRetweetToggle] = useState({
@@ -46,6 +46,14 @@ function Tweet({ tweet, type }) {
       return `${months} M ago`;
     }
   };
+//handle all tweets loading
+function handleLat (){
+  SetAppHelpers(prevState => ({
+    ...prevState,
+    toggleforalltweets: !prevState.toggleforalltweets
+  }));
+}
+
 // handle loading
   const handleLoading = () => {
     SetAppHelpers(prevState => ({
@@ -84,6 +92,7 @@ function Tweet({ tweet, type }) {
         toast.success(`${response.data.message}`);
         handleLoading();
         handleReload();
+        handleLat();
         setRetweetToggle({
           togglefortop: false,
           toggleforbottom: false
