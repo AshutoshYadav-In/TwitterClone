@@ -10,16 +10,16 @@ dotenv.config();
 
 // Define Zod schema for validation
 const signupSchema = z.object({
-    name: z.string().max(20),
-    username: z.string().max(20),
-    email: z.string().email(),
-    password: z
-      .string()
-      .max(100)
-      .min(8)
-      .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/,{message:"Pattern mismatch"}),
-    confirmpassword: z.string().max(100)
-  });
+  name: z.string().max(20),
+  username: z.string().max(20),
+  email: z.string().email(),
+  password: z.string()
+  .max(100)
+  .min(8)
+  .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/, { message: "Pattern mismatch" }),
+  confirmpassword: z.string().max(100)
+});
+
 
 const signinSchema =z.object({
     email: z.string().email(),

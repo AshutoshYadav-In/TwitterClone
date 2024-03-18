@@ -8,8 +8,8 @@ export const signupSchema = Yup.object().shape({
         .required('Password is required')
         .max(100, 'Password must be at most 100 characters')
         .matches(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-            'Password must contain at least 6 characters, one uppercase, one lowercase, one number, and one special character'
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()-_=+{}\[\]|;:'",.<>?]{8,}$/,
+            'Password must contain at least one lowercase letter, one uppercase letter, and one number'
         ),
     confirmpassword: Yup.string()
         .required('Confirm password is required')
@@ -32,8 +32,8 @@ export const editProfileSchema = (isChecked) => {
                 .min(6, 'Password must be at least 6 characters')
                 .max(100, 'Password must be at most 100 characters')
                 .matches(
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-                    'Password must contain at least 6 characters, one uppercase, one lowercase, one number, and one special character'
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()-_=+{}\[\]|;:'",.<>?]{8,}$/,
+                    'Password must contain at least one lowercase letter, one uppercase letter, and one number'
                 ),
             confirmpassword: Yup.string()
                 .required('Confirm password is required')

@@ -19,7 +19,7 @@ const UserSchema = z.object({
     .string()
     .max(100)
     .min(8)
-    .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, {
+    .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/, {
       message: "Pattern mismatch",
     })
     .optional(),
