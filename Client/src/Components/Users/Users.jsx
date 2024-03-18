@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { appContext } from '../../App';
 import { BASE_URL } from '../Helpers/Base_Url';
-function Users({ info, valueforrefresh, setValueForRefresh }) {
+function Users({ info, valueforrefresh,type, setValueForRefresh }) {
     const { id } = useParams();
     const[followInfo,setFollowInfo] =useState();
     const { SetAppHelpers, currentUser } = useContext(appContext);
@@ -35,11 +35,20 @@ function Users({ info, valueforrefresh, setValueForRefresh }) {
             };
             const response = await axios.get(`${BASE_URL}/api/user/follow/${infoid}`, { headers });
             if (response.status === 200) {
-                setValueForRefresh(!valueforrefresh);
+                if(type !== "search"){
+                    setValueForRefresh(!valueforrefresh);
+                }
                 handleFollowReload();
                 getFollowInfo()
             }
         } catch (error) {
+            console.log(error)
+          if(`${error.response.data.message === "Can't follow yourself"}`){
+            toast.warning(`${error.response.data.message}`)
+          }
+          else{
+            toast.error(`${error.response.data.message}`)
+          }
         }
     }
 
@@ -50,7 +59,7 @@ const getFollowInfo = async()=>{
       const headers = {
           'Authorization': `Bearer ${token}`,
       };
-      const response = await axios.get(`${BASE_URL}/api/user/followinfo/${id}` , {headers});
+      const response = await axios.get(`${BASE_URL}/api/user/followinfo/${type === "search" ? currentUser._id : id}` , {headers});
       if(response.status===200){
       }
       setFollowInfo(response.data)

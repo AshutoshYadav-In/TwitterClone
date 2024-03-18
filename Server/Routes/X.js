@@ -19,5 +19,6 @@ router.get('/gettweet/:id/:type',verifyToken,X.getTweet);
 router.get('/tweet/:id' , X.singleTweet);
 router.get('/followinfo/:id' ,verifyToken, X.followInfo);
 router.get('/user/:id' , X.otherUser);
-router.get('/alltweets' , X.getAllTweets)
+router.get('/alltweets' , X.getAllTweets);
+router.post('/searchresults' , X.getSearchResults)
 module.exports = router;

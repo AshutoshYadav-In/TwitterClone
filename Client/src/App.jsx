@@ -14,6 +14,7 @@ import { useState ,createContext,useEffect} from 'react';
 import Singletweet from './Components/Singletweet/Singletweet';
 import Followerinfo from './Components/Followerinfo/Followerinfo';
 import Confirmdelete from './Components/Confirmdelete/Confirmdelete';
+import Pagenotfound from './Components/pagenotfound/pagenotfound';
 export const appContext = createContext();
 function App() {
   const [currentUser, setCurrentUser] =useState();
@@ -70,6 +71,7 @@ function App() {
       <Route path="/tweet/:id" element={<ProtectedRoute element={Singletweet} />} />
       <Route path="/search" element={<ProtectedRoute element={Searchcomponent} />} />
       <Route path="/:id/:infotype" element={<ProtectedRoute element={Followerinfo} />} />
+      <Route path="*" element={<Pagenotfound />} />
       </Routes>
       </div>
     </div>

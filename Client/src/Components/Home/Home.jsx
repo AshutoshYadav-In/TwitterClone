@@ -1,6 +1,7 @@
 import Sidebar from '../Sidebar/Sidebar'
 import Header from '../Header/Header';
-import React, { useEffect } from 'react'
+import { React, useEffect, useCallback } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { useContext } from 'react';
 import Tweet from '../Tweet/Tweet.jsx';
 import axios from "axios"
@@ -17,8 +18,8 @@ import { tweetValidationSchema } from '../Helpers/Yup.js';
 import { BASE_URL } from '../Helpers/Base_Url.js';
 function Home() {
     const inputRef = useRef(null);
-    const { SetAppHelpers, currentUser,AppHelpers } = useContext(appContext);
-    const [tweets, setTweets] = useState();
+    const { SetAppHelpers, currentUser, AppHelpers } = useContext(appContext);
+    const [tweets, setTweets] = useState([]);
     const [userDetails, setUserDetails] = useState({
         tweetText: "",
     });
@@ -26,6 +27,7 @@ function Home() {
         preview: '',
         file: null
     });
+
     //Handles input reference
     const handleImageClick = () => {
         if (inputRef.current) {
@@ -91,8 +93,8 @@ function Home() {
                     toggleLoading();
                     SetAppHelpers(prevState => ({
                         ...prevState,
-                         toggleforalltweets: !prevState.toggleforalltweets
-                      }));
+                        toggleforalltweets: !prevState.toggleforalltweets
+                    }));
                 }
             } catch (error) {
                 if (error.response && error.response.status === 400) {
@@ -115,7 +117,6 @@ function Home() {
             }));
         }
     }
-
     //fetch all tweets 
     const fetchTweets = async () => {
         try {
@@ -129,6 +130,7 @@ function Home() {
             toggleLoading();
         }
     }
+
     useEffect(() => {
         fetchTweets();
     }, [AppHelpers.toggleforalltweets])
@@ -168,15 +170,16 @@ function Home() {
                     </div>
                     <input type="file" accept="image/*" ref={inputRef} style={{ display: 'none' }} onChange={handleFileChange} />
                 </form>
-                {
-                    tweets?.length > 0 ? (
-                        tweets.map((tweet, index) => (
-                            <Tweet key={index} tweet= {tweet} type= {"posts"} />
-                        ))
-                    ) : (
-                        <div className='NDA'> Nothing to see here! </div>
-                    )
-                }
+            
+                    {
+                        tweets?.length > 0 ? (
+                            tweets.map((tweet, index) => (
+                                <Tweet key={index} tweet={tweet} type={"posts"} />
+                            ))
+                        ) : (
+                            <div className='NDA'> Nothing to see here! </div>
+                        )
+                    }
 
             </div>
         </div>

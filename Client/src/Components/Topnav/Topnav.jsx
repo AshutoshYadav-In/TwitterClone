@@ -1,10 +1,11 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import debounce from 'lodash/debounce';
 import './Topnav.css'
-function Topnav(props) {
+function Topnav({toggle, name , search , SetSearch}) {
   const Navigate = useNavigate();
   //Back navigation
   const handleBackButtonClick = () => {
@@ -19,11 +20,21 @@ function Topnav(props) {
     }
   }, []);
 
+  //debouncing 
+  const handleSearchDebounce = (text) => {
+    deb(text);
+  };
+  const deb = useCallback(
+    debounce((text) => {
+      SetSearch(text);
+    }, 500),
+    []
+  );
   return (
     <div className='Topnav-Component'>
       <FontAwesomeIcon icon={faArrowLeft} style={{ color: "#e7e9ea", }} onClick={handleBackButtonClick}  />
       {
-        props.toggle == "name" ? <p>{props.name}</p> : <input type="text" placeholder='Search X' />
+        toggle == "name" ? <p>{name}</p> : <input type="text" onChange={(e)=> handleSearchDebounce(e.target.value)} placeholder='Search X' />
       }
     </div>
   )

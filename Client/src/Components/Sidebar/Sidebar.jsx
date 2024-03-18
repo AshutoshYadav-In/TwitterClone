@@ -96,10 +96,10 @@ function Sidebar() {
           <FontAwesomeIcon icon={faUser} style={{ color: "#e7e9ea", }} />
           <p>View Profile</p>
         </Link>
-        <Link to="/About" className='Sidebar-Component-Options'>
+        <a href="https://ashutoshyadav-in.github.io/Portfolio/#" target='_blank' className='Sidebar-Component-Options'>
           <FontAwesomeIcon icon={faCode} style={{ color: "#e7e9ea", }} />
           <p>About Developer</p>
-        </Link>
+        </a>
         <Link className='Sidebar-Component-Options' onClick={logout}>
           <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ color: "#e7e9ea" }} />
           <p>Logout</p>

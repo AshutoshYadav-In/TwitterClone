@@ -1,7 +1,7 @@
 .Header-Component{
     position:sticky;
     top: 0;
-    z-index: 2;
+    z-index: 3;
 }
 .Header-Component-Container{
     height: 55px;
