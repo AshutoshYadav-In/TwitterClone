@@ -63,7 +63,7 @@ getUser();
    <Profiledetails SetTweetType= {SetTweetType}/>
   { tweetData?.tweets.length >0 ?
    tweetData?.tweets.map((tweet,index) => (
-        <Tweet key={index} tweet={tweet} type={tweetType} />
+        <Tweet key={index} tweet={tweet} user = {user} type={tweetType} />
       )) : <div className='NDA'>No data available</div>}
     </div>
   )

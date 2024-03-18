@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faHeart, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faRetweet, faPen, faX } from '@fortawesome/free-solid-svg-icons';
 import './Tweet.css'
-function Tweet({ tweet, type,setLat,lat }) {
+function Tweet({ tweet, type,setLat,lat,user }) {
   const { id } = useParams();
   const { currentUser, AppHelpers, SetAppHelpers } = useContext(appContext);
   const [retweetToggle, setRetweetToggle] = useState({
@@ -125,7 +125,7 @@ const handleDelete = (id,type)=>{
         type == "reposts" && type !== "singletweet"&&
         <div className='Tweet-Component-Repost'>
           <FontAwesomeIcon icon={faRetweet} />
-          <p>{id === currentUser?._id ? "You reposted" : tweet?.user.name}</p>
+          <p>{id === currentUser?._id ? "You reposted" : `${user?.name} reposted`}</p>
         </div>
       }
       { type !== "singletweet" &&

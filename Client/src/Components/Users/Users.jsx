@@ -29,12 +29,14 @@ function Users({ info, valueforrefresh,type, setValueForRefresh }) {
     //follow toggle
     const followToggle = async (infoid) => {
         try {
+            handleLoading();
             const token = sessionStorage.getItem('token');
             const headers = {
                 'Authorization': `Bearer ${token}`,
             };
             const response = await axios.get(`${BASE_URL}/api/user/follow/${infoid}`, { headers });
             if (response.status === 200) {
+                handleLoading();
                 if(type !== "search"){
                     setValueForRefresh(!valueforrefresh);
                 }
@@ -42,7 +44,7 @@ function Users({ info, valueforrefresh,type, setValueForRefresh }) {
                 getFollowInfo()
             }
         } catch (error) {
-            console.log(error)
+            handleLoading();
           if(`${error.response.data.message === "Can't follow yourself"}`){
             toast.warning(`${error.response.data.message}`)
           }
