@@ -549,7 +549,9 @@ const getTweet = async (req, res) => {
           new Date(mostRecentCommentA.createdAt)
         );
       });
-
+      tweets.forEach((tweet) => {
+        tweet.comments = tweet.comments.filter((comment) => String(comment.user._id) === userId);
+      });
       tweets = tweets.filter((tweet) => !tweet.quotefor[0]?.deleted);
       tweets = tweets.filter((tweet) => tweet.comments.user !== null);
       tweets = tweets.filter((tweet) => tweet.user !== null);
